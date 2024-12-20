@@ -13,15 +13,15 @@ def index():
     return jsonify({"message": "Crypticworld api route"}), 200
 
 
-@blueprint.route("/generate_hash", methods=("POST",))
+@blueprint.route("/generate_hash/", methods=("POST",))
 def generate_hash():
     if request.method == "POST":
-        # posted data
-        data = request.json
-
         # If posted data is not json serializable
         if not request.is_json:
             return jsonify({"error": "Unsupported Media Type"}), 415
+
+        # posted data
+        data = request.json
 
         # checking for missing parameters
         if "content" not in dict(data).keys():
