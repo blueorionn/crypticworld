@@ -37,9 +37,39 @@ def generate_hash():
         content = data["content"]
         hashing_algorithm = data["hashing_algorithm"]
         encoding_format = data["encoding_format"]
+        digest_length = (
+            data["digest_length"] if "digest_length" in dict(data).keys() else None
+        )
+
+        # The shake_128 and shake_256 algorithms
+        # provide variable length digests with length_in_bits
+        if hashing_algorithm in ["shake_128", "shake_256"]:
+            if digest_length is None:
+                return (
+                    jsonify(
+                        {
+                            "error": "hashing algorithm shake_128 and shake_256 requires a variable digest length"
+                        }
+                    ),
+                    422,
+                )
+
+            try:
+                digest_length = int(digest_length)
+            except:
+                return (
+                    jsonify(
+                        {
+                            "error": "digest length must a valid integer greater than or equal to 8"
+                        }
+                    ),
+                    422,
+                )
 
         try:
-            result = generate_hash_func(content, hashing_algorithm, encoding_format)
+            result = generate_hash_func(
+                content, hashing_algorithm, encoding_format, digest_length
+            )
             return (
                 jsonify(
                     {

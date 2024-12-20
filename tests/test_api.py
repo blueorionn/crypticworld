@@ -120,3 +120,67 @@ def test_generate_hash(
         "encoding_format": "utf-8",
         "result": expected,
     }
+
+
+def test_generate_hash_invalid_params_for_shake_hashing_algorithm(client: FlaskClient):
+    # without digest length
+    response_without_digest_length = client.post(
+        "/api/generate_hash/",
+        json={
+            "content": f"hello world!",
+            "hashing_algorithm": f"shake_128",
+            "encoding_format": "utf-8",
+        },
+    )
+
+    # inavalid digest length
+    response_with_invalid_digest_length = client.post(
+        "/api/generate_hash/",
+        json={
+            "content": f"hello world!",
+            "hashing_algorithm": f"shake_128",
+            "encoding_format": "utf-8",
+            "digest_length": "abcd",
+        },
+    )
+
+    assert response_without_digest_length.status_code == 422
+    assert response_without_digest_length.json == {
+        "error": "hashing algorithm shake_128 and shake_256 requires a variable digest length"
+    }
+
+    assert response_with_invalid_digest_length.status_code == 422
+    assert response_with_invalid_digest_length.json == {
+        "error": "digest length must a valid integer greater than or equal to 8"
+    }
+
+
+@pytest.mark.parametrize("hashing_algorithm, content, expected, digest_length", [
+    ("shake_128", "hello world!", "15372b0f35229f5fa04f4a262efd609d79f9958d46f9693df968c821f6b2bfda", 32),
+    ("shake_256", "hello world!", "1237cfe493413ac80f7b6b41369f7afa4a3ada93e7edf8de9f93e476796f9aa1", 32),
+])
+def test_generate_hash_for_shake_hashing_algorithm(
+    client: FlaskClient,
+    hashing_algorithm: str,
+    content: str,
+    expected: str,
+    digest_length: int,
+):
+    # response
+    response = client.post(
+        "/api/generate_hash/",
+        json={
+            "content": f"{content}",
+            "hashing_algorithm": f"{hashing_algorithm}",
+            "encoding_format": "utf-8",
+            "digest_length": digest_length,
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json == {
+        "payload": content,
+        "hashing_algorithm": hashing_algorithm,
+        "encoding_format": "utf-8",
+        "result": expected,
+    }
