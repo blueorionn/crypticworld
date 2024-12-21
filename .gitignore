@@ -1,6 +1,13 @@
 # Project environment
 .venv
 
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
 # exclude secrets
 .env
 
