@@ -94,4 +94,4 @@ Encoding references: https://docs.python.org/3/library/codecs.html
 
 ## License
 
-[MIT](https://github.com/blueorionn/crypticworld/LICENSE)
+[MIT](https://github.com/blueorionn/crypticworld/blob/master/LICENSE)
