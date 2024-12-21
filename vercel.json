@@ -12,7 +12,6 @@
         }
     ],
     "env": {
-        "PYTHONDONTWRITEBYTECODE": 1,
         "FLASK_ENV": "production"
     },
     "framework": "custom",
