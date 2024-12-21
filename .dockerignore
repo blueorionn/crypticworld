@@ -1,0 +1,25 @@
+# Project environment
+.venv
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# exclude secrets
+.env
+
+# exclude cache
+*.pyc
+__pycache__/
+
+# testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ignore todo/
+todo/
+todo.txt
