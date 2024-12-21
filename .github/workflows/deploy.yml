@@ -8,8 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    deployment: 
-      environment: production  # Specify the environment for deployment
+    environment: production  # Specify the environment for deployment
 
     steps:
     # Step 1: Check out the code
