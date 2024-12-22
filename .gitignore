@@ -23,8 +23,3 @@ htmlcov/
 # Ignore todo/
 todo/
 todo.txt
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
