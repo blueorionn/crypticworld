@@ -16,7 +16,7 @@ WORKDIR $APP_DIR
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-ENV FLASK_ENV="deployment"
+ENV FLASK_ENV="production"
 ENV VIRTUAL_ENV=/home/app/project/.venv
 ENV PATH="/home/app/project/.venv/bin:$PATH"
 
@@ -34,6 +34,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # copy project
 COPY . $APP_DIR
 
+# Copy gunicorn configuration
+COPY gunicorn.conf.py $APP_DIR/
+
 # chown all the files to the app user
 RUN chown -R app:app $APP_DIR
 
@@ -50,4 +53,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8000
 
 # Start Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "wsgi:app"]
+ENTRYPOINT ["gunicorn", "-c", "gunicorn.conf.py", "wsgi:app"]
