@@ -23,3 +23,6 @@ htmlcov/
 # Ignore todo/
 todo/
 todo.txt
+
+# exclude tailwind utilites
+crypticworld/static/css/style.css

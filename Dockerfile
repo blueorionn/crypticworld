@@ -28,6 +28,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
     git \
+    nodejs \
+    npm \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -37,6 +39,10 @@ COPY . $APP_DIR
 # Copy gunicorn configuration
 COPY gunicorn.conf.py $APP_DIR/
 
+# Create npm cache directory and set permissions
+RUN mkdir -p /home/app/.npm && \
+    chown -R app:app /home/app/.npm
+    
 # chown all the files to the app user
 RUN chown -R app:app $APP_DIR
 
@@ -48,6 +54,12 @@ RUN python3 -m venv $VIRTUAL_ENV
 
 # Install Python dependencies in the virtual environment
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Initialize node project
+RUN npm install
+
+# Create css file
+RUN npm run buildCss
 
 # Expose port
 EXPOSE 8000
