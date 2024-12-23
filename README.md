@@ -16,20 +16,20 @@ Crypticworld is a lightweight web application built using Flask that allows user
 
 ## Supported Hashing Algorithms
 
-- blake2b
-- sha3_256
-- sha256
-- sha224
-- sha3_224
-- sha384
-- sha512
-- sha3_512
-- blake2s
-- shake_128
-- shake_256
-- sha3_384
-- sha1
-- md5
+- Blake2b
+- SHA3-256
+- SHA256
+- SHA224
+- SHA3-224
+- SHA384
+- SHA512
+- SHA3-512
+- Blake2s
+- SHAKE128
+- SHAKE256
+- SHA3-384
+- SHA1
+- MD5
 
 ## Supported Encoding Formats
 
