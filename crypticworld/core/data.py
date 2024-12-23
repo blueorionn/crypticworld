@@ -1,0 +1,16 @@
+supported_algorithms = [
+    {"name": "blake2b", "title": "Blake2b", "url": "/"},
+    {"name": "sha3_256", "title": "SHA3-256", "url": "/"},
+    {"name": "sha256", "title": "SHA256", "url": "/"},
+    {"name": "sha224", "title": "SHA224", "url": "/"},
+    {"name": "sha3_224", "title": "SHA3-224", "url": "/"},
+    {"name": "sha384", "title": "SHA384", "url": "/"},
+    {"name": "sha512", "title": "SHA512", "url": "/"},
+    {"name": "sha3_512", "title": "SHA3-512", "url": "/"},
+    {"name": "blake2s", "title": "Blake2s", "url": "/"},
+    {"name": "shake_128", "title": "SHAKE128", "url": "/"},
+    {"name": "shake_256", "title": "SHAKE256", "url": "/"},
+    {"name": "sha3_384", "title": "SHA3-384", "url": "/"},
+    {"name": "sha1", "title": "SHA1", "url": "/"},
+    {"name": "md5", "title": "MD5", "url": "/"},
+]

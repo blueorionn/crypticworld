@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypticworld - Text Encrypter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body class="dark">
+    {% include "layouts/header.html" %}
+    <main class="w-full">
+        <section class="w-full py-6 md:py-9 lg:py-12 pb-12 md:pb-18 lg:pb-24 bg-gray-800" aria-label="secondary-header">
+            <div class="max-w-5xl mx-auto">
+                <h1 class="w-max mx-auto text-2xl md:text-3xl lg:text-4xl font-bold py-4 lg:py-6 text-gray-200">Cryptic
+                    World</h1>
+                <h2 class="text-center text-lg lg:text-xl font-medium text-gray-300">Crypticworld is a lightweight web
+                    application built using Flask that allows users to hash any given text
+                    using a wide variety of hashing algorithms. This app is designed to support multiple encoding
+                    formats.
+                </h2>
+            </div>
+        </section>
+        <section class="w-full py-6 md:py-12 lg:py-18 bg-gray-900">
+            <div class="max-w-5xl mx-auto">
+                <h2
+                    class="w-min text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[4%] after:mt-1 after:opacity-80 after:bg-gray-700">
+                    Algorithms</h2>
+
+                <div class="mt-6 md:mt-9 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    {% for algorithm in algorithms %}
+                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url }}"><span>{{ algorithm.title }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="w-full py-6 md:py-12 lg:py-18 mt-6 md:mt-12 lg:mt-18">
+                <div class="w-max mx-auto">
+                    <div class="h-2 w-8 md:w-12 lg:w-16 rounded bg-[--clr-bs-green] mx-auto"></div>
+                    <div class="py-4 md:py-6 lg:py-8 mx-auto">
+                        <h1 class="text-center text-base md:text-lg lg:text-xl font-semibold text-gray-300">See something missing?</h1>
+                        <h2 class="mt-2 text-center text-base md:text-lg lg:text-xl font-medium text-gray-400">Feel free to contribute to the code on my GitHub repository</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% include "layouts/footer.html" %}
+</body>
+
+</html>
