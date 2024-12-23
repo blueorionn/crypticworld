@@ -2,7 +2,7 @@
 
 from flask import Blueprint, render_template
 from flask.views import MethodView
-from .data import supported_algorithms
+from .data import algorithms
 
 
 blueprint = Blueprint("core", __name__)
@@ -10,7 +10,7 @@ blueprint = Blueprint("core", __name__)
 
 class IndexView(MethodView):
     def get(self):
-        data = {"algorithms": supported_algorithms}
+        data = {"algorithms": algorithms}
         return render_template("index.html", **data)
 
 
