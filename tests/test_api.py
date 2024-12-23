@@ -155,10 +155,23 @@ def test_generate_hash_invalid_params_for_shake_hashing_algorithm(client: FlaskC
     }
 
 
-@pytest.mark.parametrize("hashing_algorithm, content, expected, digest_length", [
-    ("shake_128", "hello world!", "15372b0f35229f5fa04f4a262efd609d79f9958d46f9693df968c821f6b2bfda", 32),
-    ("shake_256", "hello world!", "1237cfe493413ac80f7b6b41369f7afa4a3ada93e7edf8de9f93e476796f9aa1", 32),
-])
+@pytest.mark.parametrize(
+    "hashing_algorithm, content, expected, digest_length",
+    [
+        (
+            "shake_128",
+            "hello world!",
+            "15372b0f35229f5fa04f4a262efd609d79f9958d46f9693df968c821f6b2bfda",
+            32,
+        ),
+        (
+            "shake_256",
+            "hello world!",
+            "1237cfe493413ac80f7b6b41369f7afa4a3ada93e7edf8de9f93e476796f9aa1",
+            32,
+        ),
+    ],
+)
 def test_generate_hash_for_shake_hashing_algorithm(
     client: FlaskClient,
     hashing_algorithm: str,

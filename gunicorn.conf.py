@@ -3,15 +3,15 @@ import multiprocessing
 
 # Worker Configuration
 workers = max(int(multiprocessing.cpu_count() * 2 + 1), 1)
-worker_class = 'sync'
+worker_class = "sync"
 threads = 2
 worker_connections = 1000
 
 # Networking
-bind = '0.0.0.0:8000'
-forwarded_allow_ips = '*'
+bind = "0.0.0.0:8000"
+forwarded_allow_ips = "*"
 proxy_protocol = True
-proxy_allow_ips = '*'
+proxy_allow_ips = "*"
 
 # Timeout Configuration
 timeout = 120
