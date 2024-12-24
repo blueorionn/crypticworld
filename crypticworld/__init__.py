@@ -61,7 +61,7 @@ def register_error_handlers(app: Flask):
 
     @app.errorhandler(405)
     def method_not_allowed(e):
-        return render_template("handlers/405.html"), 500
+        return render_template("handlers/405.html"), 405
 
     @app.errorhandler(500)
     def internal_server_error(e):
