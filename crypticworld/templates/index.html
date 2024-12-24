@@ -24,16 +24,22 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='script/main.js') }}" defer></script>
 </head>
 
-<body class="dark">
+<body>
     {% include "layouts/header.html" %}
     <main class="w-full">
-        <section class="w-full py-6 md:py-9 lg:py-12 pb-12 md:pb-18 lg:pb-24 bg-gray-800" aria-label="secondary-header">
+        <section class="w-full py-6 md:py-9 lg:py-12 pb-12 md:pb-18 lg:pb-24 bg-gray-200 dark:bg-gray-800"
+            aria-label="secondary-header">
             <div class="max-w-5xl mx-auto">
-                <h1 class="w-max mx-auto text-2xl md:text-3xl lg:text-4xl font-bold py-4 lg:py-6 text-gray-200">Cryptic
+                <h1
+                    class="w-max mx-auto text-2xl md:text-3xl lg:text-4xl font-bold py-4 lg:py-6 text-gray-900 dark:text-gray-200">
+                    Cryptic
                     World</h1>
-                <h2 class="px-4 text-center text-base md:text-lg lg:text-xl font-medium text-gray-300">Crypticworld is a
+                <h2
+                    class="px-4 text-center text-base md:text-lg lg:text-xl font-medium text-gray-700 dark:text-gray-300">
+                    Crypticworld is a
                     lightweight web
                     application built using Flask that allows users to hash any given text
                     using a wide variety of hashing algorithms. This app is designed to support multiple encoding
@@ -41,27 +47,31 @@
                 </h2>
             </div>
         </section>
-        <section class="w-full px-6 py-6 md:py-12 lg:py-18 bg-gray-900">
+        <section class="w-full px-6 py-6 md:py-12 lg:py-18 bg-gray-300 dark:bg-gray-900">
             <div class="max-w-5xl mx-auto">
                 <h2
-                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-700">
+                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-400 after:dark:bg-gray-700">
                     Hash Text</h2>
 
                 <div class="mt-6 md:mt-9 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                     {% for algorithm in algorithms %}
-                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url.text_hash }}"><span
-                            class="text-base lg:text-lg">{{ algorithm.title }}</span></a>
+                    <a class="p-4 rounded bg-gray-400 dark:bg-gray-700 hover:scale-105 transition-all"
+                        href="{{ algorithm.url.text_hash }}"><span
+                            class="text-base lg:text-lg text-gray-800 dark:text-gray-300">{{ algorithm.title
+                            }}</span></a>
                     {% endfor %}
                 </div>
             </div>
             <div class="max-w-5xl mx-auto mt-12">
                 <h2
-                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-700">
+                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-700 dark:text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-400 after:dark:bg-gray-700">
                     Hash File</h2>
 
                 <div class="mt-6 md:mt-9 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                     {% for algorithm in algorithms %}
-                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url.file_hash }}"><span>{{ algorithm.title
+                    <a class="p-4 rounded bg-gray-400 dark:bg-gray-700 hover:scale-105 transition-all"
+                        href="{{ algorithm.url.file_hash }}"><span
+                            class="text-base lg:text-lg text-gray-800 dark:text-gray-300">{{ algorithm.title
                             }}</span></a>
                     {% endfor %}
                 </div>
@@ -70,22 +80,26 @@
                 <div class="w-max my-8">
                     <div class="h-2 w-8 md:w-12 lg:w-16 rounded bg-[--clr-bs-green] mx-auto"></div>
                     <div class="py-4 md:py-6 lg:py-8 mx-auto">
-                        <h1 class="text-center text-lg lg:text-xl font-semibold text-gray-300">See
+                        <h1 class="text-center text-lg lg:text-xl font-semibold text-gray-800 dark:text-gray-300">See
                             something missing?</h1>
-                        <h2 class="md:mt-2 text-center text-base md:text-lg lg:text-xl font-medium text-gray-400">Feel free
+                        <h2
+                            class="md:mt-2 text-center text-base md:text-lg lg:text-xl font-medium text-gray-700 dark:text-gray-400">
+                            Feel
+                            free
                             to contribute to the code on my GitHub repository.</h2>
                     </div>
-                    <div class="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 lg:gap-8">
+                    <div
+                        class="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 lg:gap-8">
                         <a href="https://github.com/blueorionn/crypticworld" target="_blank"
-                            class="py-2 px-4 md:py-4 md:px-8 flex justify-center items-center gap-4 rounded-full bg-gray-700">
+                            class="py-2 px-4 md:py-4 md:px-8 flex justify-center items-center gap-4 rounded-full bg-gray-700 hover:bg-black transition-all">
                             <img src="/static/logos/github-mark-white.png" alt="Github logo"
                                 class="aspect-auto h-4 lg:h-6">
-                            <span class="font-semibold">Contribute on Github</span>
+                            <span class="font-semibold text-gray-300">Contribute on Github</span>
                         </a>
                         <a href="https://x.com/SS_Swadhinn" target="_blank"
-                            class="py-2 px-8 md:py-4 md:px-16 flex justify-center items-center gap-4 rounded-full bg-black">
+                            class="py-2 px-8 md:py-4 md:px-16 flex justify-center items-center gap-4 rounded-full bg-black hover:bg-gray-700 transition-all">
                             <img src="/static/logos/x-logo.svg" alt="Twitter/X logo" class="aspect-auto h-2.5 lg:h-4">
-                            <span class="font-semibold">Follow Me</span>
+                            <span class="font-semibold text-gray-300">Follow Me</span>
                         </a>
                     </div>
                 </div>
