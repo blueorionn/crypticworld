@@ -33,33 +33,60 @@
             <div class="max-w-5xl mx-auto">
                 <h1 class="w-max mx-auto text-2xl md:text-3xl lg:text-4xl font-bold py-4 lg:py-6 text-gray-200">Cryptic
                     World</h1>
-                <h2 class="text-center text-lg lg:text-xl font-medium text-gray-300">Crypticworld is a lightweight web
+                <h2 class="px-4 text-center text-base md:text-lg lg:text-xl font-medium text-gray-300">Crypticworld is a
+                    lightweight web
                     application built using Flask that allows users to hash any given text
                     using a wide variety of hashing algorithms. This app is designed to support multiple encoding
                     formats.
                 </h2>
             </div>
         </section>
-        <section class="w-full py-6 md:py-12 lg:py-18 bg-gray-900">
+        <section class="w-full px-6 py-6 md:py-12 lg:py-18 bg-gray-900">
             <div class="max-w-5xl mx-auto">
                 <h2
-                    class="w-min text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[4%] after:mt-1 after:opacity-80 after:bg-gray-700">
-                    Algorithms</h2>
+                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-700">
+                    Hash Text</h2>
 
                 <div class="mt-6 md:mt-9 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                     {% for algorithm in algorithms %}
-                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url }}"><span>{{ algorithm.title }}</span></a>
+                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url.text_hash }}"><span
+                            class="text-base lg:text-lg">{{ algorithm.title }}</span></a>
                     {% endfor %}
                 </div>
             </div>
-            <div class="w-full py-6 md:py-12 lg:py-18 mt-6 md:mt-12 lg:mt-18">
-                <div class="w-max mx-auto">
+            <div class="max-w-5xl mx-auto mt-12">
+                <h2
+                    class="w-max text-base md:text-lg lg:text-xl font-semibold text-gray-300 after:content-[''] after:absolute after:block after:h-1 after:w-[10%] md:after:w-[5%] after:mt-1 after:opacity-80 after:bg-gray-700">
+                    Hash File</h2>
+
+                <div class="mt-6 md:mt-9 lg:mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                    {% for algorithm in algorithms %}
+                    <a class="p-4 rounded bg-gray-700" href="{{ algorithm.url.file_hash }}"><span>{{ algorithm.title
+                            }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="w-full flex justify-center items-center py-6 md:py-12 lg:py-18 mt-6 md:mt-12 lg:mt-18">
+                <div class="w-max my-8">
                     <div class="h-2 w-8 md:w-12 lg:w-16 rounded bg-[--clr-bs-green] mx-auto"></div>
                     <div class="py-4 md:py-6 lg:py-8 mx-auto">
-                        <h1 class="text-center text-base md:text-lg lg:text-xl font-semibold text-gray-300">See
+                        <h1 class="text-center text-lg lg:text-xl font-semibold text-gray-300">See
                             something missing?</h1>
-                        <h2 class="mt-2 text-center text-base md:text-lg lg:text-xl font-medium text-gray-400">Feel free
-                            to contribute to the code on my GitHub repository</h2>
+                        <h2 class="md:mt-2 text-center text-base md:text-lg lg:text-xl font-medium text-gray-400">Feel free
+                            to contribute to the code on my GitHub repository.</h2>
+                    </div>
+                    <div class="mt-4 md:mt-6 flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 lg:gap-8">
+                        <a href="https://github.com/blueorionn/crypticworld" target="_blank"
+                            class="py-2 px-4 md:py-4 md:px-8 flex justify-center items-center gap-4 rounded-full bg-gray-700">
+                            <img src="/static/logos/github-mark-white.png" alt="Github logo"
+                                class="aspect-auto h-4 lg:h-6">
+                            <span class="font-semibold">Contribute on Github</span>
+                        </a>
+                        <a href="https://x.com/SS_Swadhinn" target="_blank"
+                            class="py-2 px-8 md:py-4 md:px-16 flex justify-center items-center gap-4 rounded-full bg-black">
+                            <img src="/static/logos/x-logo.svg" alt="Twitter/X logo" class="aspect-auto h-2.5 lg:h-4">
+                            <span class="font-semibold">Follow Me</span>
+                        </a>
                     </div>
                 </div>
             </div>
