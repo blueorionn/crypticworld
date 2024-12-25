@@ -47,6 +47,11 @@ class ThemeManager {
     return this.root.classList.contains('dark') ? 'dark' : 'light';
   }
 
+  // get localstorage
+  getThemeStorage() {
+    return localStorage.getItem('theme');
+  }
+
   // toogle theme
   toogleTheme() {
     if (this.getCurrentTheme() == 'dark') {

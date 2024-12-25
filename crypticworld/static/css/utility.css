@@ -4,8 +4,10 @@
   transform: translateX(-100%);
 }
 
-.display-navbar {
-  transform: translateX(100%);
+.display-sidebar {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(0%);
+  z-index: 110;
 }
 
 ._hide-content {
