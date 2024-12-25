@@ -6,8 +6,8 @@
   box-sizing: border-box;
 }
 
-:root{
-  --clr-bs-green: #42B883;
+:root {
+  --clr-bs-green: #42b883;
 }
 
 html {
@@ -18,18 +18,30 @@ body {
   height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  font-family: "Inter var experimental", "Inter var", Inter, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    'Inter var experimental',
+    'Inter var',
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
 }
 
-body{
+body {
   color: black;
   background-color: white;
 }
 
 @media (prefers-color-scheme: dark) {
-  body{
+  body {
     color: white;
     background-color: black;
   }

@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build files
+dist/
+build/
+public/
+
+# files to ignore
+*.md
+*.json
+*.yaml
+*.xml
+*.txt
+*.png
+*.jpg
+*.svg
+*.py
+
+# Specific directories to ignore
+coverage/
+.git/
+.vscode/

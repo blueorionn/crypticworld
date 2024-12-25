@@ -1,125 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hash String to {{ head.algorithm_name }} - Crypticworld</title>
-    <meta name="description"
-        content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats.">
+    <meta
+      name="description"
+      content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats."
+    />
     <meta name="google-site-verification" content="toVnlyBWfIrTB52GxiBZr1xnHcpzSLxaiqytEXETOcU" />
     <meta property="og:title" content="Hash String to {{ head.algorithm_name }} - Crypticworld" />
-    <meta property="og:description"
-        content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats." />
+    <meta
+      property="og:description"
+      content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats."
+    />
     <meta property="og:url" content="https://crypticworld.functionbasket.com/" />
-    <meta property="og:image"
-        content="https://crypticworld.functionbasket.com/static/logos/crypticworld-logo-full.png" />
+    <meta
+      property="og:image"
+      content="https://crypticworld.functionbasket.com/static/logos/crypticworld-logo-full.png"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SS_Swadhinn" />
     <meta name="twitter:title" content="Hash String to {{ head.algorithm_name }} - Crypticworld" />
-    <meta name="twitter:description"
-        content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats." />
-    <meta name="twitter:image"
-        content="https://crypticworld.functionbasket.com/static/logos/crypticworld-logo-full.png" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/utility.css') }}">
+    <meta
+      name="twitter:description"
+      content="Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats."
+    />
+    <meta
+      name="twitter:image"
+      content="https://crypticworld.functionbasket.com/static/logos/crypticworld-logo-full.png"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utility.css') }}" />
     <script src="{{ url_for('static', filename='script/main.js') }}" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     {% include "layouts/header.html" %}
     <main class="w-full">
-        <div class="py-4 relative flex justify-center items-center bg-gray-700" aria-label="secondary-header">
-            <div class="absolute xl:relative xl:hidden left-0 h-full flex justify-center items-center">
-                <button type="button" class="px-8" id="sidebar-toogle-button">
-                    <span class="sr-only">Toogle sidebar button</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-gray-300" viewBox="0 0 512 512">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="48"
-                            d="M88 152h336M88 256h336M88 360h336" />
-                    </svg>
-                </button>
-            </div>
-            <div>
-                <h2>Hash String to {{ head.algorithm_name }}</h2>
-            </div>
+      <div class="py-4 relative flex justify-center items-center bg-gray-700" aria-label="secondary-header">
+        <div class="absolute xl:relative xl:hidden left-0 h-full flex justify-center items-center">
+          <button type="button" class="px-8" id="sidebar-toogle-button">
+            <span class="sr-only">Toogle sidebar button</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-gray-300" viewBox="0 0 512 512">
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                stroke-width="48"
+                d="M88 152h336M88 256h336M88 360h336"
+              />
+            </svg>
+          </button>
         </div>
-        <section class="w-full relative flex">
-            <aside
-                class="w-full max-w-xs lg:max-w-sm fixed h-[100vh] top-0 xl:relative flex flex-col gap-4 px-4 transition-all bg-gray-700"
-                data-sidebar>
-                <div class="w-max xl:hidden my-6 xl:my-0">
-                    <a href="/" class="flex gap-1 md:gap-2 justify-center items-center">
-                        <img src="/static/logos/crypticworld-logo.png" alt="Website Logo"
-                            class="aspect-auto h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12">
-                        <h1 class="text-gray-800 dark:text-gray-200 font-bold text-xl md:text-2xl lg:text-3xl">
-                            Cryptic<span class="text-[--clr-bs-green]">world</span></h1>
-                    </a>
-                </div>
-                <h2 class="text-lg font-bold text-gray-400">Hash</h2>
-                <div class="flex flex-col">
-                    {% for algorithm in algorithms %}
-                    {% if algorithm.title == head.algorithm_name %}
-                    <div class="w-full py-3">
-                        <div class="flex justify-between items-center">
-                            <a href="{{ algorithm.url.text_hash }}">
-                                <span class="font-medium text-green-400">{{ algorithm.title }}</span>
-                            </a>
-                            <button type="button" class="flex-grow flex justify-end" data-toogle-sidebar-hash-lists="">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-all"
-                                    viewBox="0 0 512 512">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        class="stroke-green-500 fill-none" stroke-width="48"
-                                        d="M112 184l144 144 144-144" />
-                                </svg>
-                            </button>
-                        </div>
-                        <ul class="list-none px-4 py-2 _hide-content">
-                            <li class="list-none">
-                                <a href="{{ algorithm.url.text_hash }}">{{ algorithm.title }}</a>
-                            </li>
-                            <li class="list-none">
-                                <a href="{{ algorithm.url.file_hash }}">{{ algorithm.title }} File</a>
-                            </li>
-                        </ul>
-                    </div>
-                    {% else %}
-                    <div class="w-full py-3">
-                        <div class="flex justify-between items-center">
-                            <a href="{{ algorithm.url.text_hash }}">
-                                <span class="font-medium">{{ algorithm.title }}</span>
-                            </a>
-                            <button type="button" class="flex-grow flex justify-end" data-toogle-sidebar-hash-lists="">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-all"
-                                    viewBox="0 0 512 512">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        class="stroke-gray-300 fill-none" stroke-width="48"
-                                        d="M112 184l144 144 144-144" />
-                                </svg>
-                            </button>
-                        </div>
-                        <ul class="list-none px-4 py-2 _hide-content">
-                            <li class="list-none">
-                                <a href="{{ algorithm.url.text_hash }}">{{ algorithm.title }}</a>
-                            </li>
-                            <li class="list-none">
-                                <a href="{{ algorithm.url.file_hash }}">{{ algorithm.title }} File</a>
-                            </li>
-                        </ul>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </aside>
-            <section class="w-full flex-grow">
-                <section class="h-full">
-
-                </section>
-            </section>
+        <div>
+          <h2>Hash String to {{ head.algorithm_name }}</h2>
+        </div>
+      </div>
+      <section class="w-full relative flex">
+        <aside
+          class="w-full max-w-xs lg:max-w-sm fixed h-[100vh] top-0 xl:relative flex flex-col gap-4 px-4 transition-all bg-gray-700"
+          data-sidebar
+        >
+          <div class="w-max xl:hidden my-6 xl:my-0">
+            <a href="/" class="flex gap-1 md:gap-2 justify-center items-center">
+              <img
+                src="/static/logos/crypticworld-logo.png"
+                alt="Website Logo"
+                class="aspect-auto h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
+              />
+              <h1 class="text-gray-800 dark:text-gray-200 font-bold text-xl md:text-2xl lg:text-3xl">
+                Cryptic<span class="text-[--clr-bs-green]">world</span>
+              </h1>
+            </a>
+          </div>
+          <h2 class="text-lg font-bold text-gray-400">Hash</h2>
+          <div class="flex flex-col">
+            {% for algorithm in algorithms %} {% if algorithm.title == head.algorithm_name %}
+            <div class="w-full py-3">
+              <div class="flex justify-between items-center">
+                <a href="{{ algorithm.url.text_hash }}">
+                  <span class="font-medium text-green-400">{{ algorithm.title }}</span>
+                </a>
+                <button type="button" class="flex-grow flex justify-end" data-toogle-sidebar-hash-lists="">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-all" viewBox="0 0 512 512">
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="stroke-green-500 fill-none"
+                      stroke-width="48"
+                      d="M112 184l144 144 144-144"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <ul class="list-none px-4 py-2 _hide-content">
+                <li class="list-none">
+                  <a href="{{ algorithm.url.text_hash }}">{{ algorithm.title }}</a>
+                </li>
+                <li class="list-none">
+                  <a href="{{ algorithm.url.file_hash }}">{{ algorithm.title }} File</a>
+                </li>
+              </ul>
+            </div>
+            {% else %}
+            <div class="w-full py-3">
+              <div class="flex justify-between items-center">
+                <a href="{{ algorithm.url.text_hash }}">
+                  <span class="font-medium">{{ algorithm.title }}</span>
+                </a>
+                <button type="button" class="flex-grow flex justify-end" data-toogle-sidebar-hash-lists="">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-all" viewBox="0 0 512 512">
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="stroke-gray-300 fill-none"
+                      stroke-width="48"
+                      d="M112 184l144 144 144-144"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <ul class="list-none px-4 py-2 _hide-content">
+                <li class="list-none">
+                  <a href="{{ algorithm.url.text_hash }}">{{ algorithm.title }}</a>
+                </li>
+                <li class="list-none">
+                  <a href="{{ algorithm.url.file_hash }}">{{ algorithm.title }} File</a>
+                </li>
+              </ul>
+            </div>
+            {% endif %} {% endfor %}
+          </div>
+        </aside>
+        <section class="w-full flex-grow">
+          <section class="h-full"></section>
         </section>
+      </section>
     </main>
     {% include "layouts/footer.html" %}
-</body>
-
+  </body>
 </html>
