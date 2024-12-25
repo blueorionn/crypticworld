@@ -59,9 +59,6 @@ class ThemeManager {
         // if local storage has light mode
         this.setManualTheme('light')
       }
-    } else {
-      // set light theme by default
-      this.setInitialTheme('light');
     }
   }
 
@@ -171,5 +168,7 @@ class SidebarManager {
   }
 }
 
-// Initalize sidebar manager
-const sidebarManager = new SidebarManager();
+// Initalize sidebar manager if not in home page
+if (document.title !== 'Crypticworld - Text Encrypter'){
+  const sidebarManager = new SidebarManager();
+}
