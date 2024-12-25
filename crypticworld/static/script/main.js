@@ -6,7 +6,7 @@ class ThemeManager {
     this.toogleButton = document.getElementById('toogle-theme-button');
 
     // Initialize theme
-    this.#setTheme();
+    this.setInitialTheme();
 
     // Watch for system theme changes
     this.mediaQuery.addEventListener('change', () => this.#setTheme());
@@ -48,8 +48,21 @@ class ThemeManager {
   }
 
   // get localstorage
-  getThemeStorage() {
-    return localStorage.getItem('theme');
+  setInitialTheme() {
+    let currentTheme = localStorage.getItem('theme')
+
+    if (currentTheme) {
+      if (currentTheme == 'dark') {
+        // if local storage has dark mode
+        this.setManualTheme('dark')
+      } else if (currentTheme == 'light') {
+        // if local storage has light mode
+        this.setManualTheme('light')
+      }
+    } else {
+      // set light theme by default
+      this.setInitialTheme('light');
+    }
   }
 
   // toogle theme
