@@ -1,0 +1,21 @@
+/* custom css */
+
+.hide-sidebar{
+    transform: translateX(-100%);
+}
+
+.display-navbar{
+    transform: translateX(100%);
+}
+
+._hide-content{
+    display: none;
+}
+
+._display-content{
+    display: block;
+}
+
+._rotate-content{
+    transform: rotate(180deg);
+}
