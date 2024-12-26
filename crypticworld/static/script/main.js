@@ -181,7 +181,7 @@ const sidebarManager = new SidebarManager();
 class HashString {
   constructor() {
     this.textArea = document.querySelector('textarea#input');
-    this.outputElement = document.querySelector('article#output');
+    this.outputElement = document.querySelector('textarea#output');
     this.url = '/api/generate_hash/';
 
     this.fetchData();
@@ -189,7 +189,7 @@ class HashString {
 
   fetchData() {
     let timeOutId,
-      delay = 500,
+      delay = 250,
       textArea = this.textArea,
       url = this.url,
       output = this.outputElement;
@@ -202,13 +202,15 @@ class HashString {
     // fetch from api
     function fetchApi() {
       let textData = textArea.value;
+      let pageUrl = window.location.href.split('/'),
+        algorithm = pageUrl[pageUrl.length - 1];
 
       fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: `${textData}`, hashing_algorithm: 'blake2b', encoding_format: 'utf-8' }),
+        body: JSON.stringify({ content: `${textData}`, hashing_algorithm: `${algorithm}`, encoding_format: 'utf-8' }),
       })
         .then((response) => {
           if (!response.ok) {
