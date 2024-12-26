@@ -49,15 +49,15 @@ class ThemeManager {
 
   // get localstorage
   setInitialTheme() {
-    let currentTheme = localStorage.getItem('theme')
+    let currentTheme = localStorage.getItem('theme');
 
     if (currentTheme) {
       if (currentTheme == 'dark') {
         // if local storage has dark mode
-        this.setManualTheme('dark')
+        this.setManualTheme('dark');
       } else if (currentTheme == 'light') {
         // if local storage has light mode
-        this.setManualTheme('light')
+        this.setManualTheme('light');
       }
     }
   }
@@ -80,6 +80,10 @@ class SidebarManager {
   constructor() {
     this.sideBar = document.querySelector('aside[data-sidebar]');
     this.sideBarToogleButton = document.querySelector('button#sidebar-toogle-button');
+
+    // If elements not in root exit
+    if (!this.sideBar || !this.sideBarToogleButton) return;
+
     this.sideBarClasses = {
       showSideBar: 'display-sidebar',
       hideSideBar: 'hide-sidebar',
@@ -119,12 +123,12 @@ class SidebarManager {
     // If width is greater than 1280
     if (this.width > this.minWidthToDisplaySideBar) return;
 
-    if (this.sideBar.classList.contains(this.hideClass)) {
-      this.sideBar.classList.remove(this.showclass, this.hideClass);
-      this.sideBar.classList.add(this.showclass);
-    } else {
+    if (this.sideBar.classList.contains(this.showclass)) {
       this.sideBar.classList.remove(this.showclass, this.hideClass);
       this.sideBar.classList.add(this.hideClass);
+    } else {
+      this.sideBar.classList.remove(this.showclass, this.hideClass);
+      this.sideBar.classList.add(this.showclass);
     }
   }
 
@@ -168,7 +172,61 @@ class SidebarManager {
   }
 }
 
-// Initalize sidebar manager if not in home page
-if (document.title !== 'Crypticworld - Text Encrypter'){
-  const sidebarManager = new SidebarManager();
+// Initalize sidebar manager.
+const sidebarManager = new SidebarManager();
+
+// Hash String
+class HashString {
+  constructor() {
+    this.textArea = document.querySelector('textarea#input');
+    this.outputElement = document.querySelector('article#output');
+    this.url = '/api/generate_hash/';
+
+    this.fetchData();
+  }
+
+  fetchData() {
+    let timeOutId,
+      delay = 500,
+      textArea = this.textArea,
+      url = this.url,
+      output = this.outputElement;
+
+    textArea.addEventListener('input', function (event) {
+      clearTimeout(timeOutId);
+      timeOutId = setTimeout(fetchApi, delay);
+    });
+
+    // fetch from api
+    function fetchApi() {
+      let textData = textArea.value;
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content: `${textData}`, hashing_algorithm: 'blake2b', encoding_format: 'utf-8' }),
+      }).then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        output.textContent = `${data.result}`
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+
+    return function () {
+      clearTimeout(timeOutId);
+      textArea.removeEventListener('input', fetchApi);
+    };
+  }
 }
+
+// Initalize hashstring class if not in home page
+const hashString = new HashString();
