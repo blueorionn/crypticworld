@@ -59,6 +59,8 @@ class ThemeManager {
         // if local storage has light mode
         this.setManualTheme('light');
       }
+    } else {
+      this.#setTheme();
     }
   }
 
@@ -207,18 +209,19 @@ class HashString {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ content: `${textData}`, hashing_algorithm: 'blake2b', encoding_format: 'utf-8' }),
-      }).then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
       })
-      .then(data => {
-        output.textContent = `${data.result}`
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          output.textContent = `${data.result}`;
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
     }
 
     return function () {
