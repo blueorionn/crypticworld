@@ -184,6 +184,9 @@ class HashString {
     this.outputElement = document.querySelector('textarea#output');
     this.url = '/api/generate_hash/';
 
+    // if elements not in root exit
+    if(!this.textArea || !this.outputElement) return;
+
     this.fetchData();
   }
 
