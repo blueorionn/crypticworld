@@ -17,6 +17,7 @@ class DevelopmentConfig(Config):
 
     ENV = "dev"
     DEBUG = True
+    STATIC_FOLDER = os.path.join(Config.APP_DIR, "static/")
 
 
 class ProductionConfig(Config):
@@ -24,6 +25,7 @@ class ProductionConfig(Config):
 
     ENV = "prod"
     DEBUG = False
+    STATIC_FOLDER = None
 
 
 class TestingConfig(Config):
