@@ -13,7 +13,7 @@ def create_app(config_object=config):
 
     :param config_object: The configuration object to use
     """
-    app = Flask(__name__, static_folder=getattr(config_object, "STATIC_FOLDER"))
+    app = Flask(__name__)
     app.config.from_object(config_object)
 
     # log config_object type
@@ -23,6 +23,7 @@ def create_app(config_object=config):
     register_extension(app)
     register_context_processors(app)
     register_blueprints(app)
+    register_public_request_handler(app)
     register_error_handlers(app)
 
     return app
@@ -45,6 +46,18 @@ def register_blueprints(app: Flask):
 
     app.register_blueprint(core.views.blueprint)
     app.register_blueprint(api.views.blueprint)
+
+
+def register_public_request_handler(app: Flask):
+    """Handle public request."""
+
+    @app.route("/robots.txt")
+    def robots():
+        return send_from_directory(app.static_folder, "public/robots.txt")
+
+    @app.route("/favicon.ico")
+    def favicon():
+        return send_from_directory(app.static_folder, "public/favicon.ico")
 
 
 def register_error_handlers(app: Flask):
