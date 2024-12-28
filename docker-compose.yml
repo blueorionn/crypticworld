@@ -1,0 +1,18 @@
+services:
+  web:
+    build: .
+    volumes:
+      - ./crypticworld/static:/home/app/project/static
+    expose:
+      - 8000
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - ./crypticworld/static:/home/app/project/static:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - web
