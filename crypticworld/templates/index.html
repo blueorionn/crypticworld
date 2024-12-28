@@ -31,9 +31,10 @@
       content="https://crypticworld.functionbasket.com/static/logos/crypticworld-logo-full.png"
     />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script src="{{ url_for('static', filename='script/main.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ static_url('css/base.css') }}" />
+    <link rel="stylesheet" href="{{ static_url('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ static_url('css/utility.css') }}" />
+    <script src="{{ static_url('script/main.js') }}" defer></script>
   </head>
 
   <body>

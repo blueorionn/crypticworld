@@ -5,6 +5,7 @@ from flask import Flask, render_template, send_from_directory
 from crypticworld.settings import config
 from crypticworld.extensions import init_cors
 from crypticworld import core, api
+from crypticworld.ctx import static_context_processors
 
 
 def create_app(config_object=config):
@@ -20,6 +21,7 @@ def create_app(config_object=config):
     app.logger.info(f"Debug mode is {config_object.DEBUG}")
 
     register_extension(app)
+    register_context_processors(app)
     register_blueprints(app)
     register_public_request_handler(app)
     register_error_handlers(app)
@@ -31,6 +33,12 @@ def register_extension(app: Flask):
     """Registering extensions."""
 
     init_cors(app)
+
+
+def register_context_processors(app: Flask):
+    """Registering context processors."""
+
+    static_context_processors(app)
 
 
 def register_blueprints(app: Flask):

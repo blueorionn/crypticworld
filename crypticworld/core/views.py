@@ -16,15 +16,13 @@ class IndexView(MethodView):
 
 
 class StringHashView(MethodView):
-    def get(self, algorithm_name):    
+    def get(self, algorithm_name):
         if algorithm_name not in available_algorithms():
             return abort(404)
 
         data = {
-            "head": {
-                "algorithm_name": get_algorithm(algorithm_name)['title']
-            },
-            "algorithms": algorithms
+            "head": {"algorithm_name": get_algorithm(algorithm_name)["title"]},
+            "algorithms": algorithms,
         }
         return render_template("string_hasher.html", **data), 200
 
