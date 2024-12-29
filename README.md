@@ -74,13 +74,19 @@ Crypticworld is a lightweight web application built using Flask that allows user
    pip install -r requirements.txt
    ```
 
-4. Run the Flask app:
-
+4. Export variables:
    ```bash
-   flask --app crypticworld run
+   export PYTHONDONTWRITEBYTECODE=1
+   export FLASK_ENV="development"
    ```
 
-5. Open the app in your browser at `http://127.0.0.1:5000/`.
+5. Run the Flask app:
+
+   ```bash
+   python wsgi.py
+   ```
+
+6. Open the app in your browser at `http://127.0.0.1:8000/`.
 
 
 ## Acknowledgements
