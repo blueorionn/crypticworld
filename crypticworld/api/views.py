@@ -83,13 +83,16 @@ def generate_hash():
             )
         except Exception as e:
             errors = {
-                "encoding_error": "Unsupported encoding format",
+                "encoding_error": "The code point could not be encoded.",
+                "unkown_encoding": "Unsupported encoding format",
                 "hashing_error": f"Unkown algorithm {hashing_algorithm}",
             }
 
-            if re.search(str(e), errors["encoding_error"]):
-                return jsonify({"error": errors["encoding_error"]}), 400
+            if re.search(str(e), errors["unkown_encoding"]):
+                return jsonify({"error": errors["unkown_encoding"]}), 400
             elif re.search(str(e), errors["hashing_error"]):
                 return jsonify({"error": errors["hashing_error"]}), 400
+            elif re.search(str(e), errors['encoding_error']):
+                return jsonify({"error": errors['encoding_error']}), 400
             else:
                 return jsonify({"error": "Internal server error"}), 500

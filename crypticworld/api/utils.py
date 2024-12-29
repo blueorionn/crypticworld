@@ -19,7 +19,10 @@ def generate_hash_func(
         raise ValueError("Unsupported encoding format")
 
     # encoding content
-    data = content.encode(encoding_format)
+    try:
+        data = content.encode(encoding_format)
+    except:
+        raise TypeError("The code point could not be encoded.")
 
     # checking for hashing algorithm
     if hashing_algorithm not in algorithms:
