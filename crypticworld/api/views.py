@@ -92,7 +92,7 @@ def generate_hash():
                 return jsonify({"error": errors["unkown_encoding"]}), 400
             elif re.search(str(e), errors["hashing_error"]):
                 return jsonify({"error": errors["hashing_error"]}), 400
-            elif re.search(str(e), errors['encoding_error']):
-                return jsonify({"error": errors['encoding_error']}), 400
+            elif re.search(str(e), errors["encoding_error"]):
+                return jsonify({"error": errors["encoding_error"]}), 400
             else:
                 return jsonify({"error": "Internal server error"}), 500
