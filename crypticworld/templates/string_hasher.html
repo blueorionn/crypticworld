@@ -42,20 +42,24 @@
     <main class="w-full">
       <section class="w-full relative flex bg-gray-300 dark:bg-gray-900">
         <aside
-          class="w-full max-w-[15rem] lg:max-w-xs fixed min-h-[100vh] top-0 xl:relative flex flex-col gap-4 px-8 py-6 xl:z-50 transition-all bg-gray-300 brightness-105 dark:bg-slate-700 dark:brightness-90 shadow-[2px_0px_10px_0px_rgba(31,41,55,0.35)] dark:shadow-none"
+          class="w-full max-w-[15rem] lg:max-w-xs fixed min-h-[100vh] top-0 xl:relative hidden xl:flex flex-col gap-4 px-8 py-6 xl:z-50 transition-all duration-300 bg-gray-300 brightness-105 dark:bg-slate-700 dark:brightness-90 shadow-[2px_0px_10px_0px_rgba(31,41,55,0.35)] dark:shadow-none"
           data-sidebar
         >
-          <div class="w-max xl:hidden my-6 xl:my-0">
-            <a href="/" class="flex gap-1 md:gap-2 justify-center items-center">
-              <img
-                src="/static/logos/crypticworld-logo.png"
-                alt="Website Logo"
-                class="aspect-auto h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12"
-              />
-              <h1 class="text-gray-800 dark:text-gray-200 font-bold text-xl md:text-2xl lg:text-3xl">
-                Cryptic<span class="text-[--clr-bs-green]">world</span>
-              </h1>
-            </a>
+          <div class="w-full flex justify-end xl:hidden my-6 xl:my-0">
+            <button type="button" data-sidebar-toogle-button>
+              <span class="sr-only">Close Button</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 stroke-gray-300 fill-gray-300"
+                viewBox="0 -960 960 960"
+                data-v-966a8da7=""
+              >
+                <path
+                  d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                  data-v-966a8da7=""
+                ></path>
+              </svg>
+            </button>
           </div>
           <h2 class="text-lg lg:text-xl font-bold text-gray-800 dark:text-gray-400">Hash</h2>
           <div class="flex flex-col">
@@ -136,7 +140,7 @@
             aria-label="secondary-header"
           >
             <div class="absolute xl:relative xl:hidden left-0 h-full flex justify-center items-center">
-              <button type="button" class="px-8" id="sidebar-toogle-button">
+              <button type="button" class="px-8" data-sidebar-toogle-button>
                 <span class="sr-only">Toogle sidebar button</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
