@@ -180,14 +180,39 @@ const sidebarManager = new SidebarManager();
 // Hash String
 class HashString {
   constructor() {
+    // global scope
+    const globalScope = globalThis
+
+    // variables
     this.textArea = document.querySelector('textarea#input');
     this.outputElement = document.querySelector('textarea#output');
+    this.digestLenElement = document.querySelector('input#digest_len');
     this.url = '/api/generate_hash/';
-
+    this.defaultDigestLen = 64;
+    
     // if elements not in root exit
     if (!this.textArea || !this.outputElement) return;
-
+    
     this.fetchData();
+
+    // track digest len
+    this.trackDigestLen();
+  }
+
+  trackDigestLen(){
+    // current algorithm
+    let pageUrl = window.location.href.split('/'),
+        algorithm = pageUrl[pageUrl.length - 1];
+
+    if(['shake_128', 'shake_256'].includes(algorithm)){
+      // set default value
+      this.digestLenElement.value = this.defaultDigestLen;
+
+      // watch for change
+      this.digestLenElement.addEventListener('input', (event) => {
+        this.defaultDigestLen = event.currentTarget.value;
+      })
+    }
   }
 
   fetchData() {
@@ -197,13 +222,8 @@ class HashString {
       url = this.url,
       output = this.outputElement;
 
-    textArea.addEventListener('input', function (event) {
-      clearTimeout(timeOutId);
-      timeOutId = setTimeout(fetchApi, delay);
-    });
-
     // fetch from api
-    function fetchApi() {
+    const fetchApi = () => {
       let textData = textArea.value;
       let pageUrl = window.location.href.split('/'),
         algorithm = pageUrl[pageUrl.length - 1];
@@ -217,7 +237,7 @@ class HashString {
           content: `${textData}`,
           hashing_algorithm: `${algorithm}`,
           encoding_format: 'utf-8',
-          digest_length: 10,
+          digest_length: this.defaultDigestLen,
         }),
       })
         .then((response) => {
@@ -230,9 +250,21 @@ class HashString {
           output.textContent = `${data.result}`;
         })
         .catch((error) => {
+          output.textContent = `${error}`
           console.error('Error:', error);
         });
     }
+
+    // add event listner
+    textArea.addEventListener('input', function (event) {
+      clearTimeout(timeOutId);
+      timeOutId = setTimeout(fetchApi, delay);
+    });
+
+    this.digestLenElement.addEventListener('input', function(event){
+      clearTimeout(timeOutId);
+      timeOutId = setTimeout(fetchApi, delay);
+    })
 
     return function () {
       clearTimeout(timeOutId);

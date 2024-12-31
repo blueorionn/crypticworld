@@ -42,6 +42,9 @@ def generate_hash_func(
     h.update(data)
 
     if hashing_algorithm in ["shake_128", "shake_256"]:
-        return h.hexdigest(digest_length)
+        # Since each hex character represents 4 bits
+        nbits = digest_length
+        n_hex_chars = nbits // 4
+        return h.hexdigest(nbits)[:n_hex_chars]
 
     return h.hexdigest()
