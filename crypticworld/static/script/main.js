@@ -185,7 +185,7 @@ class HashString {
     this.url = '/api/generate_hash/';
 
     // if elements not in root exit
-    if(!this.textArea || !this.outputElement) return;
+    if (!this.textArea || !this.outputElement) return;
 
     this.fetchData();
   }
@@ -213,7 +213,12 @@ class HashString {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ content: `${textData}`, hashing_algorithm: `${algorithm}`, encoding_format: 'utf-8' }),
+        body: JSON.stringify({
+          content: `${textData}`,
+          hashing_algorithm: `${algorithm}`,
+          encoding_format: 'utf-8',
+          digest_length: 10,
+        }),
       })
         .then((response) => {
           if (!response.ok) {

@@ -2,6 +2,7 @@
 
 from flask import Blueprint, render_template, abort
 from flask.views import MethodView
+from crypticworld.api.data import encodings
 from .data import algorithms
 from .utils import available_algorithms, get_algorithm
 
@@ -23,6 +24,8 @@ class StringHashView(MethodView):
         data = {
             "head": {"algorithm_name": get_algorithm(algorithm_name)["title"]},
             "algorithms": algorithms,
+            "encodings": [[k, v] for k,v in encodings.items()],
+            "show_digest_len": algorithm_name in ['shake_128', 'shake_256']
         }
         return render_template("string_hasher.html", **data), 200
 
