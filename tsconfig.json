@@ -3,6 +3,7 @@
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Language and Environment */
+    "lib": ["ES6", "DOM", "ES2016"],
     "target": "ES5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
 
     /* Modules */
