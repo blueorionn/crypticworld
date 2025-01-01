@@ -11,11 +11,15 @@ def static_context_processors(app: Flask):
 
             # If asking for script
             if filename == "script/index.js" and os.path.isfile(
-                os.path.join("/static", filename)
+                os.path.join(
+                    os.path.join(current_app.config["APP_DIR"], "static"), filename
+                )
             ):
                 return os.path.join("/static", filename)
             elif filename == "script/index.js" and not os.path.isfile(
-                os.path.join("/static", filename)
+                os.path.join(
+                    os.path.join(current_app.config["APP_DIR"], "static"), filename
+                )
             ):
                 current_app.logger.warn(
                     f"{filename} Doesn't exist. Returning fallback.js"
