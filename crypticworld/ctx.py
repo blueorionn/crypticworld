@@ -20,7 +20,7 @@ def static_context_processors(app: Flask):
                 current_app.logger.warn(
                     f"{filename} Doesn't exist. Returning fallback.js"
                 )
-                return os.path.join("/static", 'script/fallback.js')
+                return os.path.join("/static", "script/fallback.js")
 
             return os.path.join("/static", filename)
 
