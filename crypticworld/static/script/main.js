@@ -146,8 +146,10 @@ class HashString {
     this.textArea = document.querySelector('textarea#input');
     this.outputElement = document.querySelector('textarea#output');
     this.digestLenElement = document.querySelector('input#digest_len');
+    this.encodingSelector = document.querySelector('select#encoding');
     this.url = '/api/generate_hash/';
     this.defaultDigestLen = 64;
+    this.encodingMethod = 'utf-8';
 
     // if elements not in root exit
     if (!this.textArea || !this.outputElement) return;
@@ -157,6 +159,10 @@ class HashString {
     // track digest len
     if (this.digestLenElement) {
       this.trackDigestLen();
+    }
+
+    if (this.encodingSelector) {
+      this.trackEncodingMethod();
     }
   }
 
@@ -174,6 +180,12 @@ class HashString {
         this.defaultDigestLen = event.currentTarget.value;
       });
     }
+  }
+
+  trackEncodingMethod() {
+    this.encodingSelector.addEventListener('change', (event) => {
+      this.encodingMethod = event.currentTarget.value;
+    });
   }
 
   fetchData() {
@@ -197,7 +209,7 @@ class HashString {
         body: JSON.stringify({
           content: `${textData}`,
           hashing_algorithm: `${algorithm}`,
-          encoding_format: 'utf-8',
+          encoding_format: `${this.encodingMethod}`,
           digest_length: this.defaultDigestLen,
         }),
       })
@@ -224,6 +236,13 @@ class HashString {
 
     if (this.digestLenElement) {
       this.digestLenElement.addEventListener('input', function (event) {
+        clearTimeout(timeOutId);
+        timeOutId = setTimeout(fetchApi, delay);
+      });
+    }
+
+    if (this.encodingSelector) {
+      this.encodingSelector.addEventListener('change', () => {
         clearTimeout(timeOutId);
         timeOutId = setTimeout(fetchApi, delay);
       });
