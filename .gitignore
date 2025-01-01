@@ -28,4 +28,4 @@ todo.txt
 crypticworld/static/css/style.css
 
 # exclude run time build js
-crypticworld/static/script/main.js
+crypticworld/static/script/index.js
