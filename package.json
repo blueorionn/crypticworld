@@ -8,7 +8,8 @@
     "watchCss": "npx tailwindcss -i ./crypticworld/static/css/tailwind.css -o ./crypticworld/static/css/style.css --watch",
     "buildCss": "npx tailwindcss -i ./crypticworld/static/css/tailwind.css -o ./crypticworld/static/css/style.css --minify",
     "format": "prettier --write \"**/*.{html,css,js}\"",
-    "format:check": "prettier --check \"**/*.{html,css,js}\""
+    "format:check": "prettier --check \"**/*.{html,css,js}\"",
+    "buildJs": "tsc"
   },
   "repository": {
     "type": "git",
