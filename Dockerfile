@@ -61,6 +61,9 @@ RUN npm install
 # Create css file
 RUN npm run buildCss
 
+# Create js file
+RUN npm run buildJs
+
 # Expose port
 EXPOSE 8000
 
