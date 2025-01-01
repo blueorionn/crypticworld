@@ -26,3 +26,6 @@ todo.txt
 
 # exclude tailwind utilites
 crypticworld/static/css/style.css
+
+# exclude run time build js
+crypticworld/static/script/main.js
