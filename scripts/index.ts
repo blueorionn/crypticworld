@@ -98,7 +98,7 @@ class SidebarManager {
     this.sideBar = document.querySelector('aside[data-sidebar]');
     this.sideBarToogleButtons = document.querySelectorAll('button[data-sidebar-toogle-button]');
     this.sideBarClasses = {
-      showSideBar: ['display-sidebar', 'flex'],
+      showSideBar: ['display-sidebar'],
       hideSideBar: ['hide-sidebar', 'hidden'],
     };
     this.showClass = this.sideBarClasses.showSideBar;
