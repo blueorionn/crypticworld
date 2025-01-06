@@ -285,3 +285,6 @@ class HashString {
     };
   }
 }
+
+// Initalizing hashstring
+const hashString = new HashString();
