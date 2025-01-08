@@ -288,3 +288,45 @@ class HashString {
 
 // Initalizing hashstring
 const hashString = new HashString();
+
+class FileManager{
+  inputFile: HTMLInputElement | null
+  displayFileName: HTMLParagraphElement | null
+  displayFileSize: HTMLParagraphElement | null
+
+  constructor() {
+    this.inputFile = document.querySelector('input#dropzone-file');
+    this.displayFileName = document.querySelector("p#display-file-name");
+    this.displayFileSize = document.querySelector("p#display-file-size");
+
+    // If input file doesn't exist.
+    if(!this.inputFile || !this.displayFileName || !this.displayFileSize) return;
+
+    // track file change
+    this.getUploadFileName();
+  }
+
+  getUploadFileName(){
+    if(!this.inputFile) return;
+
+    this.inputFile.addEventListener("input", ()=>{
+      const fileList = this.inputFile?.files;
+      if(!fileList?.length) return;
+
+      // if file list.
+      if(fileList[0].name && this.displayFileName){
+        const displayFileNameElement = this.displayFileName
+        displayFileNameElement.textContent = `${fileList[0].name}`
+      }
+
+      // calculate file size.
+      if(this.displayFileSize){
+        const displayFileSizeElement = this.displayFileSize;
+        displayFileSizeElement.textContent = `${fileList[0].size} bytes`
+      }
+    })
+  }
+}
+
+// Initializing filemanager.
+const filemanager = new FileManager();
