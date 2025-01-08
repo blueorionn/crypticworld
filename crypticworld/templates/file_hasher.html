@@ -165,7 +165,7 @@
           <section>
             <div class="grid grid-rows-2 xl:grid-cols-2 xl:grid-rows-1">
               <div
-                class="w-full min-h-96 xl:min-h-[56rem] h-full border-b-2 xl:border-r-4 xl:border-b-0 border-gray-400 dark:border-gray-700"
+                class="w-full min-h-96 xl:min-h-[56rem] h-full overflow-hidden border-b-2 xl:border-r-4 xl:border-b-0 border-gray-400 dark:border-gray-700"
               >
                 <div
                   class="w-full py-4 px-4 xl:px-8 border-y-2 border-gray-300 dark:border-gray-800 bg-gray-200 dark:bg-gray-900 brightness-95 dark:brightness-[1.75]"
@@ -200,13 +200,44 @@
                     />
                     {% endif %}
                   </div>
+                  <div class="group transition-all">
+                    <button
+                      type="button"
+                      class="rounded px-3 xl:px-6 py-1 xl:py-2 bg-gray-50 border border-gray-300 w-max dark:bg-gray-700 dark:border-gray-600 dark:text-white group-hover:bg-gray-100 group-hover:dark:bg-gray-800 group-hover:border-gray-400 group-hover:dark:border-gray-700"
+                    >
+                      <span class="text-gray-800 dark:text-gray-200 font-medium text-base">Hash</span>
+                    </button>
+                  </div>
                 </div>
-                <textarea
-                  name="input"
-                  id="input"
-                  placeholder="Type your text here..."
-                  class="h-full w-full resize-none outline-none font-medium text-base xl:text-lg p-6 text-gray-900 dark:text-gray-200 bg-gray-300 dark:bg-gray-900"
-                ></textarea>
+                <div class="h-full overflow-hidden flex items-center justify-center w-full">
+                  <label
+                    for="dropzone-file"
+                    class="h-full flex flex-col items-center justify-start xl:justify-center w-full rounded cursor-pointer bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700"
+                  >
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                      <svg
+                        class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 20 16"
+                      >
+                        <path
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                        />
+                      </svg>
+                      <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                        <span class="font-semibold">Click to upload</span> or drag and drop
+                      </p>
+                      <p class="text-xs text-gray-500 dark:text-gray-400">TXT (MAX. 25MB)</p>
+                    </div>
+                    <input id="dropzone-file" type="file" class="hidden" />
+                  </label>
+                </div>
               </div>
               <div class="w-full">
                 <div
