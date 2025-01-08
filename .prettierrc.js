@@ -33,5 +33,11 @@ module.exports = {
         parser: 'babel',
       },
     },
+    {
+      files: '*.ts',
+      options: {
+        parser: 'typescript',
+      },
+    },
   ],
 };
