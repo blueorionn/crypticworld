@@ -30,8 +30,25 @@ class StringHashView(MethodView):
         return render_template("string_hasher.html", **data), 200
 
 
+class FileHashView(MethodView):
+    def get(self, algorithm_name):
+        if algorithm_name not in available_algorithms():
+            return abort(404)
+
+        data = {
+            "head": {"algorithm_name": get_algorithm(algorithm_name)["title"]},
+            "algorithms": algorithms,
+            "encodings": [[k, v] for k, v in encodings.items()],
+            "show_digest_len": algorithm_name in ["shake_128", "shake_256"],
+        }
+        return render_template("file_hasher.html", **data), 200
+
+
 index_view = IndexView.as_view("home")
 blueprint.add_url_rule("/", view_func=index_view)
 
 string_hash_view = StringHashView.as_view("string_hash")
 blueprint.add_url_rule("/hash/<algorithm_name>", view_func=string_hash_view)
+
+file_hash_view = FileHashView.as_view("file_hash")
+blueprint.add_url_rule("/file/hash/<algorithm_name>", view_func=file_hash_view)
