@@ -217,7 +217,7 @@ class HashString {
 
   fetchData(url: string) {
     let timeOutId: number,
-      delay = 250,
+      delay = 50,
       textArea = this.inputTextArea,
       output = this.outputTextArea;
 
