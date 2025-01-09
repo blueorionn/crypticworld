@@ -9,6 +9,7 @@
     "buildCss": "npx tailwindcss -i ./crypticworld/static/css/tailwind.css -o ./crypticworld/static/css/style.css --minify",
     "format": "prettier --write \"**/*.{html,css,js,ts}\"",
     "format:check": "prettier --check \"**/*.{html,css,js,ts}\"",
+    "watchJs": "tsc -w",
     "buildJs": "tsc"
   },
   "repository": {
