@@ -103,6 +103,6 @@ def generate_file_hash():
     if request.method == "POST":
         # validating content type
         if not "Content-Type" in request.headers:
-            return jsonify({"error": "Unsupported Media Type"}), 415
+            return jsonify({"error": "Invalid content type"}), 415
 
         return jsonify({"message": "File recived"})
