@@ -183,7 +183,7 @@ class HashString {
     this.encodingSelector = document.querySelector('select#encoding');
 
     // fetch data
-    this.fetchData();
+    this.fetchData(this.url);
 
     // track digest length
     if (this.digestLenElement) {
@@ -215,11 +215,10 @@ class HashString {
     });
   }
 
-  fetchData() {
+  fetchData(url: string) {
     let timeOutId: number,
       delay = 250,
       textArea = this.inputTextArea,
-      url = this.url,
       output = this.outputTextArea;
 
     // fetch from api
@@ -260,13 +259,13 @@ class HashString {
     };
 
     // add event listner
-    textArea?.addEventListener('input', function (event) {
+    textArea?.addEventListener('input', (event) => {
       clearTimeout(timeOutId);
       timeOutId = setTimeout(fetchApi, delay);
     });
 
     if (this.digestLenElement) {
-      this.digestLenElement.addEventListener('input', function (event) {
+      this.digestLenElement.addEventListener('input', (event) => {
         clearTimeout(timeOutId);
         timeOutId = setTimeout(fetchApi, delay);
       });
@@ -279,7 +278,7 @@ class HashString {
       });
     }
 
-    return function () {
+    return () => {
       clearTimeout(timeOutId);
       textArea?.removeEventListener('input', fetchApi);
     };
