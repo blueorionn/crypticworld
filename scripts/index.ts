@@ -258,29 +258,26 @@ class HashString {
         });
     };
 
-    // add event listner
-    textArea?.addEventListener('input', (event) => {
+    // handle change function
+    const handleChange = () => {
       clearTimeout(timeOutId);
       timeOutId = setTimeout(fetchApi, delay);
-    });
+    };
+
+    // add event listner
+    textArea?.addEventListener('input', handleChange);
 
     if (this.digestLenElement) {
-      this.digestLenElement.addEventListener('input', (event) => {
-        clearTimeout(timeOutId);
-        timeOutId = setTimeout(fetchApi, delay);
-      });
+      this.digestLenElement.addEventListener('input', handleChange);
     }
 
     if (this.encodingSelector) {
-      this.encodingSelector.addEventListener('change', () => {
-        clearTimeout(timeOutId);
-        timeOutId = setTimeout(fetchApi, delay);
-      });
+      this.encodingSelector.addEventListener('change', handleChange);
     }
 
     return () => {
       clearTimeout(timeOutId);
-      textArea?.removeEventListener('input', fetchApi);
+      textArea?.removeEventListener('input', handleChange);
     };
   }
 }
