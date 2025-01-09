@@ -256,7 +256,7 @@ class HashString {
   updateDataOnInputchange() {
     let timeOutId: number,
       delay = 50,
-      url = this.url
+      url = this.url;
 
     let textArea = this.inputTextArea;
 
@@ -289,22 +289,65 @@ const hashString = new HashString();
 
 class FileManager {
   inputFile: HTMLInputElement | null;
+  outputTextArea: HTMLTextAreaElement | null;
   displayFileName: HTMLParagraphElement | null;
   displayFileSize: HTMLParagraphElement | null;
+  encodingSelector: HTMLSelectElement | null;
+  digestLenElement: HTMLInputElement | null;
+  hashButtonElement: HTMLButtonElement | null;
+  url = '/api/file/generate_hash/';
+  digestLen = 64;
+  encodingMethod = 'utf-8';
 
   constructor() {
     this.inputFile = document.querySelector('input#dropzone-file');
+    this.outputTextArea = document.querySelector('textarea#output');
     this.displayFileName = document.querySelector('p#display-file-name');
     this.displayFileSize = document.querySelector('p#display-file-size');
+    this.encodingSelector = document.querySelector('select#encoding');
+    this.digestLenElement = document.querySelector('input#digest_len');
+    this.hashButtonElement = document.querySelector('button#hash_button');
 
     // If input file doesn't exist.
     if (!this.inputFile || !this.displayFileName || !this.displayFileSize) return;
 
     // track file change
-    this.getUploadFileName();
+    this.trackFileName();
+
+    // track digest length
+    if (this.digestLenElement) {
+      this.trackDigestLen();
+    }
+
+    // track encoding selector
+    if (this.encodingSelector) {
+      this.trackEncodingMethod();
+    }
+
+    // display data
+    this.updateDataOnFileChange();
   }
 
-  getUploadFileName() {
+  trackDigestLen() {
+    // current algorithm
+    let pageUrl = window.location.href.split('/'),
+      algorithm = pageUrl[pageUrl.length - 1];
+
+    if (['shake_128', 'shake_256'].includes(algorithm)) {
+      // watch for change
+      this.digestLenElement?.addEventListener('input', (event) => {
+        this.digestLen = parseInt((event.target as HTMLInputElement).value) || this.digestLen;
+      });
+    }
+  }
+
+  trackEncodingMethod() {
+    this.encodingSelector?.addEventListener('change', (event) => {
+      this.encodingMethod = (event.currentTarget as HTMLInputElement).value;
+    });
+  }
+
+  trackFileName() {
     if (!this.inputFile) return;
 
     this.inputFile.addEventListener('input', () => {
@@ -322,6 +365,39 @@ class FileManager {
         const displayFileSizeElement = this.displayFileSize;
         displayFileSizeElement.textContent = `${fileList[0].size} bytes`;
       }
+    });
+  }
+
+  fetchData(url: string) {
+    let output = this.outputTextArea;
+    let pageUrl = window.location.href.split('/'),
+      algorithm = pageUrl[pageUrl.length - 1];
+
+    // file data
+    const fileList = this.inputFile?.files;
+    if (!fileList) return;
+
+    // arranging data
+    let data = new FormData();
+    data.append('file', fileList[0]);
+    data.append('hashing_algorithm', `${algorithm}`);
+    data.append('encoding_format', `${this.encodingMethod}`);
+    data.append('digest_length', `${this.digestLen}`);
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      body: data,
+    });
+  }
+
+  updateDataOnFileChange() {
+    let url = this.url;
+
+    this.hashButtonElement?.addEventListener('mousedown', () => {
+      this.fetchData(url);
     });
   }
 }
