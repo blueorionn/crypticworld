@@ -96,3 +96,13 @@ def generate_hash():
                 return jsonify({"error": errors["encoding_error"]}), 400
             else:
                 return jsonify({"error": "Internal server error"}), 500
+
+
+@blueprint.route("/file/generate_hash/", methods=("POST",))
+def generate_file_hash():
+    if request.method == "POST":
+        # validating content type
+        if not "Content-Type" in request.headers:
+            return jsonify({"error": "Unsupported Media Type"}), 415
+
+        return jsonify({"message": "File recived"})
