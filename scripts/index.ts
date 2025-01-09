@@ -183,7 +183,7 @@ class HashString {
     this.encodingSelector = document.querySelector('select#encoding');
 
     // fetch data
-    this.fetchData(this.url);
+    this.updateDataOnInputchange();
 
     // track digest length
     if (this.digestLenElement) {
@@ -216,52 +216,54 @@ class HashString {
   }
 
   fetchData(url: string) {
+    let textArea = this.inputTextArea,
+      output = this.outputTextArea;
+    let textData = textArea?.value;
+    let pageUrl = window.location.href.split('/'),
+      algorithm = pageUrl[pageUrl.length - 1];
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        content: `${textData}`,
+        hashing_algorithm: `${algorithm}`,
+        encoding_format: `${this.encodingMethod}`,
+        digest_length: this.digestLen,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (output) {
+          output.textContent = `${data.result}`;
+        }
+      })
+      .catch((error) => {
+        if (output) {
+          output.textContent = `${error}`;
+        }
+        console.error('Error:', error);
+      });
+  }
+
+  updateDataOnInputchange() {
     let timeOutId: number,
       delay = 50,
-      textArea = this.inputTextArea,
-      output = this.outputTextArea;
+      url = this.url
 
-    // fetch from api
-    const fetchApi = () => {
-      let textData = textArea?.value;
-      let pageUrl = window.location.href.split('/'),
-        algorithm = pageUrl[pageUrl.length - 1];
-
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          content: `${textData}`,
-          hashing_algorithm: `${algorithm}`,
-          encoding_format: `${this.encodingMethod}`,
-          digest_length: this.digestLen,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          if (output) {
-            output.textContent = `${data.result}`;
-          }
-        })
-        .catch((error) => {
-          if (output) {
-            output.textContent = `${error}`;
-          }
-          console.error('Error:', error);
-        });
-    };
+    let textArea = this.inputTextArea;
 
     // handle change function
     const handleChange = () => {
       clearTimeout(timeOutId);
-      timeOutId = setTimeout(fetchApi, delay);
+      timeOutId = setTimeout(() => this.fetchData(url), delay);
     };
 
     // add event listner
