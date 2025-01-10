@@ -3,7 +3,7 @@ import pytest
 from itertools import product
 from flask.testing import FlaskClient
 from crypticworld import create_app
-from tests.data import long_texts, algorithms, encodings
+from tests.test_string_hash_api.data import mathematical_texts, algorithms
 
 
 @pytest.fixture
@@ -22,10 +22,9 @@ def client():
 
 
 @pytest.mark.parametrize(
-    "text, algorithm, encoding",
-    list(product(long_texts, algorithms, encodings.values())),
+    "text, algorithm", list(product(mathematical_texts, algorithms))
 )
-def test_long_texts(client: FlaskClient, text: str, algorithm: str, encoding: str):
+def test_mathematical_texts(client: FlaskClient, text: str, algorithm: str):
     # digest length for shake algorithms
     digest_len = 20
 
@@ -35,7 +34,7 @@ def test_long_texts(client: FlaskClient, text: str, algorithm: str, encoding: st
         json={
             "content": text,
             "hashing_algorithm": algorithm,
-            "encoding_format": encoding,
+            "encoding_format": "utf-8",
             "digest_length": digest_len,
         },
     )

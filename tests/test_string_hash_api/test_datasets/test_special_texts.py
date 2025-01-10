@@ -3,7 +3,7 @@ import pytest
 from itertools import product
 from flask.testing import FlaskClient
 from crypticworld import create_app
-from tests.data import greek_texts, algorithms
+from tests.test_string_hash_api.data import special_texts, algorithms
 
 
 @pytest.fixture
@@ -21,8 +21,8 @@ def client():
         yield client
 
 
-@pytest.mark.parametrize("text, algorithm", list(product(greek_texts, algorithms)))
-def test_greek_texts(client: FlaskClient, text: str, algorithm: str):
+@pytest.mark.parametrize("text, algorithm", list(product(special_texts, algorithms)))
+def test_special_texts(client: FlaskClient, text: str, algorithm: str):
     # digest length for shake algorithms
     digest_len = 20
 

@@ -3,7 +3,7 @@ import pytest
 from itertools import product
 from flask.testing import FlaskClient
 from crypticworld import create_app
-from tests.data import emoji_texts, algorithms
+from tests.test_string_hash_api.data import long_texts, algorithms, encodings
 
 
 @pytest.fixture
@@ -21,8 +21,11 @@ def client():
         yield client
 
 
-@pytest.mark.parametrize("text, algorithm", list(product(emoji_texts, algorithms)))
-def test_emoji_texts(client: FlaskClient, text: str, algorithm: str):
+@pytest.mark.parametrize(
+    "text, algorithm, encoding",
+    list(product(long_texts, algorithms, encodings.values())),
+)
+def test_long_texts(client: FlaskClient, text: str, algorithm: str, encoding: str):
     # digest length for shake algorithms
     digest_len = 20
 
@@ -32,7 +35,7 @@ def test_emoji_texts(client: FlaskClient, text: str, algorithm: str):
         json={
             "content": text,
             "hashing_algorithm": algorithm,
-            "encoding_format": "utf-8",
+            "encoding_format": encoding,
             "digest_length": digest_len,
         },
     )

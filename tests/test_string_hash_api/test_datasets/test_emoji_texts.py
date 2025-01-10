@@ -3,7 +3,7 @@ import pytest
 from itertools import product
 from flask.testing import FlaskClient
 from crypticworld import create_app
-from tests.data import mathematical_texts, algorithms
+from tests.test_string_hash_api.data import emoji_texts, algorithms
 
 
 @pytest.fixture
@@ -21,10 +21,8 @@ def client():
         yield client
 
 
-@pytest.mark.parametrize(
-    "text, algorithm", list(product(mathematical_texts, algorithms))
-)
-def test_mathematical_texts(client: FlaskClient, text: str, algorithm: str):
+@pytest.mark.parametrize("text, algorithm", list(product(emoji_texts, algorithms)))
+def test_emoji_texts(client: FlaskClient, text: str, algorithm: str):
     # digest length for shake algorithms
     digest_len = 20
 
