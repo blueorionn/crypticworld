@@ -289,7 +289,6 @@ const hashString = new HashString();
 
 class FileManager {
   inputFile: HTMLInputElement | null;
-  outputTextArea: HTMLTextAreaElement | null;
   displayFileName: HTMLParagraphElement | null;
   displayFileSize: HTMLParagraphElement | null;
   encodingSelector: HTMLSelectElement | null;
@@ -301,7 +300,6 @@ class FileManager {
 
   constructor() {
     this.inputFile = document.querySelector('input#dropzone-file');
-    this.outputTextArea = document.querySelector('textarea#output');
     this.displayFileName = document.querySelector('p#display-file-name');
     this.displayFileSize = document.querySelector('p#display-file-size');
     this.encodingSelector = document.querySelector('select#encoding');
@@ -369,7 +367,6 @@ class FileManager {
   }
 
   fetchData(url: string) {
-    let output = this.outputTextArea;
     let pageUrl = window.location.href.split('/'),
       algorithm = pageUrl[pageUrl.length - 1];
 
@@ -387,7 +384,39 @@ class FileManager {
     fetch(url, {
       method: 'POST',
       body: data,
-    });
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.blob();
+      })
+      .then((data) => {
+        const blob = data;
+        const url = URL.createObjectURL(blob);
+
+        // Getting filename
+        let filename = 'download.txt';
+        const fileList = this.inputFile?.files;
+        // if file list.
+        if (fileList?.length) {
+          if (fileList[0].name && this.displayFileName) {
+            filename = `${fileList[0].name.split('.')[0]}_hashed.txt`;
+          }
+        }
+
+        // Trigger download
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename; // File name for the download
+        link.click();
+
+        // Revoke the URL to free memory
+        URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 
   updateDataOnFileChange() {
