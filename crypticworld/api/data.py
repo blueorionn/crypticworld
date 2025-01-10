@@ -18,3 +18,14 @@ encodings = {
 
 # all available algorithms
 algorithms = hashlib.algorithms_guaranteed
+
+# valid file mimetypes
+valid_mimetypes = [
+    "text/plain",
+    "text/xml",
+    "text/html",
+    "text/css",
+    "text/csv",
+    "text/calendar",
+    "text/javascript",
+]
