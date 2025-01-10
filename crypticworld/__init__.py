@@ -65,12 +65,15 @@ def register_error_handlers(app: Flask):
 
     @app.errorhandler(404)
     def not_found(e):
-        return render_template("handlers/404.html"), 404
+        data = {"error_code": "404", "error_message": "Page Not Found"}
+        return render_template("handlers/handler.html", **data), 404
 
     @app.errorhandler(405)
     def method_not_allowed(e):
-        return render_template("handlers/405.html"), 405
+        data = {"error_code": "405", "error_message": "Method Not Allowed"}
+        return render_template("handlers/handler.html", **data), 405
 
     @app.errorhandler(500)
     def internal_server_error(e):
-        return render_template("handlers/500.html"), 500
+        data = {"error_code": "500", "error_message": "Internal Server Error"}
+        return render_template("handlers/handler.html", **data), 500
