@@ -408,7 +408,7 @@ class FileManager {
         // Trigger download
         const link = document.createElement('a');
         link.href = url;
-        link.download = filename; // File name for the download
+        link.download = filename;
         link.click();
 
         // Revoke the URL to free memory
