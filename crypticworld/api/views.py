@@ -1,7 +1,8 @@
 """API views."""
 
 import re
-from flask import Blueprint, request, jsonify
+import io
+from flask import Blueprint, request, Response, jsonify
 from .utils import generate_hash_func, generate_file_hash_func
 from .validators import is_validate_filetype
 
@@ -131,15 +132,19 @@ def generate_file_hash():
             hashed_content = generate_file_hash_func(
                 file, hashing_algorithm, encoding_format, digest_length
             )
-            return (
-                jsonify(
-                    {
-                        "hashing_algorithm": hashing_algorithm,
-                        "encoding_format": encoding_format,
-                        "result": hashed_content,
-                    }
-                ),
-                200,
+
+            # Create a new file in memory with the computed content
+            output_file = io.StringIO()
+            output_file.write(hashed_content)
+            output_file.seek(0)  # Move to the start of the file for reading
+
+            # Send the file back to the user
+            return Response(
+                output_file.getvalue(),
+                mimetype="text/plain",
+                headers={
+                    "Content-Disposition": f"attachment; filename={file.filename}_hashed.txt"
+                },
             )
         except Exception as e:
             errors = {
