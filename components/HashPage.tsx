@@ -1,7 +1,33 @@
 'use client'
+import { useState, useEffect } from 'react'
+import { useDebounce } from '@/hooks/useDebounce'
 import { checkAlgorithmSupport } from '@/utils/index'
 
 export default function HashPage({ hash }: { hash: string }) {
+  const [text, setText] = useState('')
+  const debounceText = useDebounce(text, 300)
+  const [hashedText, setHashedText] = useState('')
+
+  useEffect(() => {
+    async function handleText() {
+      const res = await fetch(`/api/hash/${hash}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ text: debounceText }),
+      })
+
+      if (res.ok) {
+        const data: { text: string; hashed: string } = await res.json()
+        setHashedText(data.hashed)
+      }
+    }
+
+    // call function
+    if (debounceText !== '') handleText()
+  }, [hash, debounceText])
+
   return (
     <>
       <section className='w-full flex-grow'>
@@ -42,6 +68,8 @@ export default function HashPage({ hash }: { hash: string }) {
                 name='input'
                 id='input'
                 placeholder='Type your text here...'
+                value={text}
+                onChange={(e) => setText(e.currentTarget.value)}
                 className='h-full w-full resize-none overflow-auto bg-gray-200 p-6 text-base font-medium text-gray-900 outline-none xl:text-lg dark:bg-gray-900 dark:text-gray-200'
               ></textarea>
             </div>
@@ -53,6 +81,7 @@ export default function HashPage({ hash }: { hash: string }) {
                 name='output'
                 id='output'
                 disabled
+                value={hashedText}
                 className='h-full w-full cursor-default resize-none bg-gray-200 p-6 text-sm font-medium text-gray-950 outline-none xl:text-base dark:bg-gray-900 dark:text-gray-300'
               ></textarea>
             </div>
