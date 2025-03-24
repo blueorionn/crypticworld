@@ -18,7 +18,7 @@ export default function Header() {
                 width={48}
                 className='aspect-auto h-8 w-8 md:h-10 md:w-10 lg:h-12 lg:w-12'
               />
-              <h1 className='text-xl font-bold text-gray-800 md:text-2xl lg:text-3xl dark:text-gray-200'>
+              <h1 className='text-xl font-bold text-gray-800 lg:text-2xl dark:text-gray-200'>
                 Cryptic<span className='text-[--clr-bs-green]'>world</span>
               </h1>
             </Link>
