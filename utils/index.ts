@@ -7,6 +7,6 @@ export function generateHashUrl(hash: string) {
 /**
  * Check if algorithm is supported
  */
-export function checkAlgorithmSupport(url: string) {
-  return algorithms.find((a) => a.url === generateHashUrl(url))
+export function checkAlgorithmSupport(name: string) {
+  return algorithms.find((a) => a.url === generateHashUrl(name))
 }
