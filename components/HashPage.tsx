@@ -1,13 +1,19 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useDebounce } from '@/hooks/useDebounce'
+import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
 import { checkAlgorithmSupport } from '@/utils/index'
+import { MdOutlineContentCopy } from 'react-icons/md'
+import { FaCheck } from 'react-icons/fa6'
 
 export default function HashPage({ hash }: { hash: string }) {
   const [text, setText] = useState('')
   const debounceText = useDebounce(text, 300)
   const [hashedText, setHashedText] = useState('')
+  const [copyState, setCopyState] = useState(false)
+  const { copy } = useCopyToClipboard()
 
+  // handle text change
   useEffect(() => {
     async function handleText() {
       const res = await fetch(`/api/hash/${hash}`, {
@@ -27,6 +33,19 @@ export default function HashPage({ hash }: { hash: string }) {
     // call function
     if (debounceText !== '') handleText()
   }, [hash, debounceText])
+
+  // copyOutput
+  const handleCopyOutput = () => {
+    // timeoutId for 500ms
+    setCopyState(true)
+    const timeoutId = setTimeout(() => {
+      setCopyState(false)
+    }, 500)
+
+    // copy hashedText(output)
+    copy(hashedText)
+    return () => clearTimeout(timeoutId)
+  }
 
   return (
     <>
@@ -74,8 +93,20 @@ export default function HashPage({ hash }: { hash: string }) {
               ></textarea>
             </div>
             <div className='w-full'>
-              <div className='w-full border-y-2 border-gray-300 bg-gray-200 px-4 py-4 brightness-95 xl:px-8 dark:border-gray-800 dark:bg-gray-900 dark:brightness-[1.75]'>
+              <div className='flex w-full items-center justify-between border-y-2 border-gray-300 bg-gray-200 px-4 py-4 brightness-95 xl:px-8 dark:border-gray-800 dark:bg-gray-900 dark:brightness-[1.75]'>
                 <span className='text-gray-800 dark:text-gray-300'>Output</span>
+                <button
+                  type='button'
+                  className='cursor-pointer transition-all'
+                  onClick={handleCopyOutput}
+                >
+                  <span className='sr-only'>Copy Button</span>
+                  {copyState ? (
+                    <FaCheck className='fill-gray-700 dark:fill-gray-200' />
+                  ) : (
+                    <MdOutlineContentCopy className='fill-gray-700 dark:fill-gray-200' />
+                  )}
+                </button>
               </div>
               <textarea
                 name='output'
