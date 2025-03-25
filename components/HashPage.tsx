@@ -5,7 +5,7 @@ import { MdOutlineContentCopy } from 'react-icons/md'
 import { useSideBarProvider } from '@/context/SideBarContext'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
-import { checkAlgorithmSupport } from '@/utils/index'
+import { checkAlgorithmSupport, toggleSideBar } from '@/utils/index'
 
 export default function HashPage({ hash }: { hash: string }) {
   const [text, setText] = useState('')
@@ -14,13 +14,6 @@ export default function HashPage({ hash }: { hash: string }) {
   const [copyState, setCopyState] = useState(false)
   const { copy } = useCopyToClipboard()
   const { isSideBarOpen, setIsSideBarOpen } = useSideBarProvider()
-
-  // handler function
-  const toggleSideBar = () => {
-    if (window && window.innerWidth > 1280) return
-    if (isSideBarOpen) setIsSideBarOpen(false)
-    if (!isSideBarOpen) setIsSideBarOpen(true)
-  }
 
   // handle text change
   useEffect(() => {
@@ -67,7 +60,7 @@ export default function HashPage({ hash }: { hash: string }) {
             <button
               type='button'
               className='cursor-pointer px-8'
-              onClick={toggleSideBar}
+              onClick={() => toggleSideBar(isSideBarOpen, setIsSideBarOpen)}
             >
               <span className='sr-only'>Menu Button</span>
               <svg

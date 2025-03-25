@@ -3,16 +3,10 @@ import { useSideBarProvider } from '@/context/SideBarContext'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import algorithms from '@/data/algorithms.json'
+import { toggleSideBar } from '@/utils/index'
 
 export default function SideBar({ hashUrl }: { hashUrl: string }) {
   const { isSideBarOpen, setIsSideBarOpen } = useSideBarProvider()
-
-  // handler function
-  const toggleSideBar = () => {
-    if (window && window.innerWidth > 1280) return
-    if (isSideBarOpen) setIsSideBarOpen(false)
-    if (!isSideBarOpen) setIsSideBarOpen(true)
-  }
 
   return (
     <>
@@ -28,7 +22,7 @@ export default function SideBar({ hashUrl }: { hashUrl: string }) {
             <button
               type='button'
               className='cursor-pointer'
-              onClick={toggleSideBar}
+              onClick={() => toggleSideBar(isSideBarOpen, setIsSideBarOpen)}
             >
               <span className='sr-only'>Close Button</span>
               <svg
