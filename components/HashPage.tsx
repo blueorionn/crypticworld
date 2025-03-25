@@ -1,10 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { FaCheck } from 'react-icons/fa6'
+import { MdOutlineContentCopy } from 'react-icons/md'
+import { useSideBarProvider } from '@/context/SideBarContext'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
 import { checkAlgorithmSupport } from '@/utils/index'
-import { MdOutlineContentCopy } from 'react-icons/md'
-import { FaCheck } from 'react-icons/fa6'
 
 export default function HashPage({ hash }: { hash: string }) {
   const [text, setText] = useState('')
@@ -12,6 +13,14 @@ export default function HashPage({ hash }: { hash: string }) {
   const [hashedText, setHashedText] = useState('')
   const [copyState, setCopyState] = useState(false)
   const { copy } = useCopyToClipboard()
+  const { isSideBarOpen, setIsSideBarOpen } = useSideBarProvider()
+
+  // handler function
+  const toggleSideBar = () => {
+    if (window && window.innerWidth > 1280) return
+    if (isSideBarOpen) setIsSideBarOpen(false)
+    if (!isSideBarOpen) setIsSideBarOpen(true)
+  }
 
   // handle text change
   useEffect(() => {
@@ -55,7 +64,11 @@ export default function HashPage({ hash }: { hash: string }) {
           aria-label='secondary-header'
         >
           <div className='absolute left-0 flex h-full items-center justify-center xl:relative xl:hidden'>
-            <button type='button' className='px-8'>
+            <button
+              type='button'
+              className='cursor-pointer px-8'
+              onClick={toggleSideBar}
+            >
               <span className='sr-only'>Menu Button</span>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

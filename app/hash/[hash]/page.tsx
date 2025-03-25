@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import { SideBarProvider } from '@/context/SideBarContext'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import SideBar from '@/components/SideBar'
@@ -36,8 +37,10 @@ export default async function Page({
       <Header />
       <main className='w-full'>
         <section className='relative flex w-full bg-gray-300 dark:bg-gray-900'>
-          <SideBar hashUrl={generateHashUrl(hash)} />
-          <HashPage hash={hash} />
+          <SideBarProvider>
+            <SideBar hashUrl={generateHashUrl(hash)} />
+            <HashPage hash={hash} />
+          </SideBarProvider>
         </section>
       </main>
       <Footer />
