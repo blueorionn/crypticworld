@@ -30,7 +30,7 @@ export const SideBarProvider = ({
 export const useSideBarProvider = (): SideBarContextType => {
   const context = useContext(SideBarContext)
   if (!context) {
-    throw new Error('useSharedState must be used within SharedStateProvider')
+    throw new Error('Unknown Context')
   }
   return context
 }
