@@ -1,5 +1,6 @@
 'use client'
-import React, { createContext, useState, useContext } from 'react'
+import React, { createContext, useContext } from 'react'
+import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface SideBarContextType {
   isSideBarOpen: boolean
@@ -13,7 +14,10 @@ export const SideBarProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [isSideBarOpen, setIsSideBarOpen] = useState(true)
+  const [isSideBarOpen, setIsSideBarOpen] = useLocalStorage<boolean>(
+    'sidebar',
+    true
+  )
 
   return (
     <SideBarContext.Provider value={{ isSideBarOpen, setIsSideBarOpen }}>
