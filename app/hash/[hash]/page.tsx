@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation'
 import { SideBarProvider } from '@/context/SideBarContext'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import SideBar from '@/components/SideBar'
 import HashPage from '@/components/HashPage'
+import DynamicSideBar from '@/components/(sidebar)/DynamicSideBar'
 import { generateHashUrl, checkAlgorithmSupport } from '@/utils'
 
 // dynamic metadata
@@ -38,7 +38,7 @@ export default async function Page({
       <main className='w-full'>
         <section className='relative flex w-full bg-gray-300 dark:bg-gray-900'>
           <SideBarProvider>
-            <SideBar hashUrl={generateHashUrl(hash)} />
+            <DynamicSideBar hashUrl={generateHashUrl(hash)} />
             <HashPage hash={hash} />
           </SideBarProvider>
         </section>

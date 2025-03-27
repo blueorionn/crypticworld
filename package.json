@@ -11,6 +11,7 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@react-hook/window-size": "^3.1.1",
     "framer-motion": "^12.6.0",
     "next": "15.2.3",
     "react": "^19.0.0",
