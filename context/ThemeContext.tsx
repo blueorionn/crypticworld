@@ -1,5 +1,5 @@
 'use client'
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
@@ -19,7 +19,24 @@ export const ThemeProvider = ({
   geistSans: NextFontWithVariable
   geistMono: NextFontWithVariable
 }) => {
-  const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light')
+  const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'dark')
+  const [mounted, setMounted] = useState(false)
+
+  // Set mounted to true on client to avoid SSR/client mismatch.
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted)
+    return (
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </ThemeContext.Provider>
+    )
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
