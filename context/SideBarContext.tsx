@@ -30,7 +30,7 @@ export const SideBarProvider = ({
 export const useSideBarProvider = (): SideBarContextType => {
   const context = useContext(SideBarContext)
   if (!context) {
-    throw new Error('Unknown Context')
+    throw new Error('Unknown SideBar Context')
   }
   return context
 }
