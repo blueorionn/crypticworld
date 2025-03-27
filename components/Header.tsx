@@ -27,7 +27,7 @@ export default function Header() {
             <button
               type='button'
               id='toogle-theme-button'
-              className='flex rounded-full border-gray-400 p-0.5 lg:min-w-12 lg:border lg:bg-gray-200 dark:border-gray-500 lg:dark:bg-gray-800'
+              className='flex cursor-pointer rounded-full border-gray-400 p-0.5 lg:min-w-12 lg:border lg:bg-gray-200 dark:border-gray-500 lg:dark:bg-gray-800'
             >
               <span className='sr-only'>Theme toogle button</span>
               <div className='relative flex w-max items-center justify-end rounded-full transition-all duration-300 ease-in-out dark:grow'>
