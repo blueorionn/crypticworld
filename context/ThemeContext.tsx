@@ -1,5 +1,6 @@
 'use client'
 import React, { createContext, useContext } from 'react'
+import { NextFontWithVariable } from 'next/dist/compiled/@next/font'
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
 interface ThemeContextType {
@@ -9,12 +10,24 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
+export const ThemeProvider = ({
+  children,
+  geistSans,
+  geistMono,
+}: {
+  children: React.ReactNode
+  geistSans: NextFontWithVariable
+  geistMono: NextFontWithVariable
+}) => {
   const [theme, setTheme] = useLocalStorage<'light' | 'dark'>('theme', 'light')
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${theme}`}
+      >
+        {children}
+      </body>
     </ThemeContext.Provider>
   )
 }

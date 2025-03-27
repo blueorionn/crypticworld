@@ -1,7 +1,11 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useThemeProvider } from '@/context/ThemeContext'
 
 export default function Header() {
+  const { theme, setTheme } = useThemeProvider()
+
   return (
     <>
       <header className='relative z-[100] h-max w-full bg-gray-200 dark:bg-gray-800'>
@@ -27,6 +31,9 @@ export default function Header() {
             <button
               type='button'
               id='toogle-theme-button'
+              onClick={() =>
+                theme === 'light' ? setTheme('dark') : setTheme('light')
+              }
               className='flex cursor-pointer rounded-full border-gray-400 p-0.5 lg:min-w-12 lg:border lg:bg-gray-200 dark:border-gray-500 lg:dark:bg-gray-800'
             >
               <span className='sr-only'>Theme toogle button</span>
