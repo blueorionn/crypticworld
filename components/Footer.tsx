@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <>
-      <footer className='relative z-[100] w-full border-t-2 border-gray-300 bg-gray-200 py-4 lg:py-6 dark:border-gray-700 dark:bg-gray-900'>
+      <footer className='relative z-[100] w-full border-t-2 border-gray-300 bg-gray-300 py-4 lg:py-6 dark:border-gray-700 dark:bg-gray-900'>
         <div className='mx-auto flex max-w-5xl flex-col items-center justify-between px-4 md:flex-row'>
           <span className='cursor-default text-gray-700 dark:text-gray-300'>
             &copy; 2025 Crypticworld. All rights reserved

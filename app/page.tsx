@@ -63,7 +63,7 @@ export default function Home() {
                 <a
                   href='https://github.com/blueorionn/crypticworld'
                   target='_blank'
-                  className='flex items-center justify-center gap-4 rounded-full bg-gray-700 px-4 py-2 transition-all hover:bg-black md:px-8 md:py-4'
+                  className='flex items-center justify-center gap-4 rounded-full bg-gray-700 px-4 py-2 transition-all hover:bg-gray-600 md:px-8 md:py-4 dark:hover:bg-black'
                 >
                   <Image
                     src='/icon/github-mark-white.png'
@@ -79,7 +79,7 @@ export default function Home() {
                 <a
                   href='https://x.com/SSwadhinTandi'
                   target='_blank'
-                  className='flex items-center justify-center gap-4 rounded-full bg-black px-8 py-2 transition-all hover:bg-gray-700 md:px-16 md:py-4'
+                  className='flex items-center justify-center gap-4 rounded-full bg-gray-600 px-8 py-2 transition-all hover:bg-gray-700 md:px-16 md:py-4 dark:bg-black dark:hover:bg-gray-700'
                 >
                   <span className='sr-only'>Twitter Profile</span>
                   <Image
