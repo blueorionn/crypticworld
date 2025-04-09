@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { FaCheck } from 'react-icons/fa6'
 import { MdOutlineContentCopy } from 'react-icons/md'
+import { AiOutlineDelete } from 'react-icons/ai'
 import { useSideBarProvider } from '@/context/SideBarContext'
 import { useDebounce } from '@/hooks/useDebounce'
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
@@ -47,6 +48,11 @@ export default function HashPage({ hash }: { hash: string }) {
     // copy hashedText(output)
     copy(hashedText)
     return () => clearTimeout(timeoutId)
+  }
+
+  // delete output
+  const deleteOutput = () => {
+    setHashedText('')
   }
 
   return (
@@ -101,18 +107,28 @@ export default function HashPage({ hash }: { hash: string }) {
             <div className='w-full'>
               <div className='flex w-full items-center justify-between border-y-2 border-gray-300 bg-gray-200 px-4 py-4 brightness-95 xl:px-8 dark:border-gray-800 dark:bg-gray-900 dark:brightness-[1.75]'>
                 <span className='text-gray-800 dark:text-gray-300'>Output</span>
-                <button
-                  type='button'
-                  className='cursor-pointer transition-all'
-                  onClick={handleCopyOutput}
-                >
-                  <span className='sr-only'>Copy Button</span>
-                  {copyState ? (
-                    <FaCheck className='fill-gray-700 dark:fill-gray-200' />
-                  ) : (
-                    <MdOutlineContentCopy className='fill-gray-700 dark:fill-gray-200' />
-                  )}
-                </button>
+                <div className='flex items-center justify-center gap-4'>
+                  <button
+                    type='button'
+                    className='cursor-pointer transition-all'
+                    onClick={handleCopyOutput}
+                  >
+                    <span className='sr-only'>Copy Button</span>
+                    {copyState ? (
+                      <FaCheck className='fill-gray-700 dark:fill-gray-200' />
+                    ) : (
+                      <MdOutlineContentCopy className='fill-gray-700 dark:fill-gray-200' />
+                    )}
+                  </button>
+                  <button
+                    type='button'
+                    className='cursor-pointer transition-all'
+                    onClick={deleteOutput}
+                  >
+                    <span className='sr-only'>Delete Output</span>
+                    <AiOutlineDelete className='fill-gray-700 dark:fill-gray-200' />
+                  </button>
+                </div>
               </div>
               <textarea
                 name='output'
