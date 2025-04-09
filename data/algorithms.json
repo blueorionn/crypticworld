@@ -10,24 +10,14 @@
     "url": "/hash/blake2s"
   },
   {
-    "name": "sha3-256",
-    "title": "SHA3-256",
-    "url": "/hash/sha3_256"
+    "name": "md5",
+    "title": "MD5",
+    "url": "/hash/md5"
   },
   {
-    "name": "sha3-224",
-    "title": "SHA3-224",
-    "url": "/hash/sha3_224"
-  },
-  {
-    "name": "sha3-384",
-    "title": "SHA3-384",
-    "url": "/hash/sha3_384"
-  },
-  {
-    "name": "sha3-512",
-    "title": "SHA3-512",
-    "url": "/hash/sha3_512"
+    "name": "sha1",
+    "title": "SHA1",
+    "url": "/hash/sha1"
   },
   {
     "name": "sha224",
@@ -50,6 +40,26 @@
     "url": "/hash/sha512"
   },
   {
+    "name": "sha3-256",
+    "title": "SHA3-256",
+    "url": "/hash/sha3_256"
+  },
+  {
+    "name": "sha3-224",
+    "title": "SHA3-224",
+    "url": "/hash/sha3_224"
+  },
+  {
+    "name": "sha3-384",
+    "title": "SHA3-384",
+    "url": "/hash/sha3_384"
+  },
+  {
+    "name": "sha3-512",
+    "title": "SHA3-512",
+    "url": "/hash/sha3_512"
+  },
+  {
     "name": "shake128",
     "title": "SHAKE128",
     "url": "/hash/shake_128"
@@ -60,13 +70,13 @@
     "url": "/hash/shake_256"
   },
   {
-    "name": "sha1",
-    "title": "SHA1",
-    "url": "/hash/sha1"
+    "name": "ripemd",
+    "title": "RIPEMD",
+    "url": "/hash/ripemd"
   },
   {
-    "name": "md5",
-    "title": "MD5",
-    "url": "/hash/md5"
+    "name": "ripemd160",
+    "title": "RIPEMD-160",
+    "url": "/hash/ripemd160"
   }
 ]
