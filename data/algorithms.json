@@ -61,12 +61,12 @@
   },
   {
     "name": "shake128",
-    "title": "SHAKE128",
+    "title": "SHAKE-128",
     "url": "/hash/shake_128"
   },
   {
     "name": "shake256",
-    "title": "SHAKE256",
+    "title": "SHAKE-256",
     "url": "/hash/shake_256"
   },
   {
