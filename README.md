@@ -9,6 +9,21 @@ Crypticworld is a lightweight web application built using Nextjs that allows use
 - node (v22.14.0)
 - npm (v10.9.2)
 
+## Testing
+
+Run the below commands for testing setup
+
+```bash
+npx playwright install
+sudo npx playwright install-deps
+```
+
+To run the test execute the below command
+
+```bash
+npm run test
+```
+
 ## LICENSE
 
 [Apache-2.0 license](https://github.com/blueorionn/crypticworld/blob/main/LICENSE)
