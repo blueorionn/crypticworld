@@ -20,8 +20,8 @@ export default function Home() {
             <h2 className='px-4 text-center text-base font-medium text-gray-700 lg:text-lg dark:text-gray-300'>
               Crypticworld is a lightweight web application built using Nextjs
               that allows users to hash any given text using a wide variety of
-              hashing algorithms. This app is designed to support multiple
-              encoding formats.
+              hashing algorithms. This application encodes all input data using
+              UTF-8 encoding before generating the hash.
             </h2>
           </div>
         </section>

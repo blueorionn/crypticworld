@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 const title = 'Crypticworld - Text Encrypter'
 const description =
-  'Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This app is designed to support multiple encoding formats.'
+  'Crypticworld is a lightweight web application built using Flask that allows users to hash any given text using a wide variety of hashing algorithms. This application encodes all input data using UTF-8 encoding before generating the hash.'
 
 export const metadata: Metadata = {
   title: title,
