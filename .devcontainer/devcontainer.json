@@ -21,7 +21,8 @@
         "esbenp.prettier-vscode", // Prettier for formatting
         "ms-vscode.vscode-typescript-next", // JavaScript and TypeScript Nightly
         "dbaeumer.vscode-eslint", // ESLint
-        "bradlc.vscode-tailwindcss" // Tailwind Css IntelliSense
+        "bradlc.vscode-tailwindcss", // Tailwind Css IntelliSense
+        "biomejs.biome"
       ]
     }
   }
