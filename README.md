@@ -11,14 +11,21 @@ Crypticworld is a lightweight web application built using Nextjs that allows use
 
 ## Testing
 
-Run the below commands for testing setup
+**Run the below commands for testing setup:**
 
 ```bash
 npx playwright install
 sudo npx playwright install-deps
 ```
 
-To run the test execute the below command
+**For testing against branded browsers:**
+
+```bash
+npx playwright install chrome
+npx playwright install msedge
+```
+
+**To run the test execute the below command:**
 
 ```bash
 npm run test

@@ -1,26 +1,20 @@
-import { test, expect, request } from '@playwright/test'
+import { test, expect } from '@playwright/test'
 
 test.describe('Blake2s Hash API Page', () => {
   test('test for empty data', async ({ request }) => {
-    const response = await request.post(
-      'http://localhost:3000/api/hash/blake2s',
-      {
-        data: {},
-      }
-    )
+    const response = await request.post('/api/hash/blake2s', {
+      data: {},
+    })
 
     expect(await response.status()).toBe(500)
   })
 
   test('should return Blake2s hash of input text', async ({ request }) => {
-    const response = await request.post(
-      'http://localhost:3000/api/hash/blake2s',
-      {
-        data: {
-          text: 'hello world',
-        },
-      }
-    )
+    const response = await request.post('/api/hash/blake2s', {
+      data: {
+        text: 'hello world',
+      },
+    })
 
     expect(await response.ok()).toBeTruthy()
 
@@ -32,14 +26,11 @@ test.describe('Blake2s Hash API Page', () => {
   })
 
   test('test for special characters', async ({ request }) => {
-    const response = await request.post(
-      'http://localhost:3000/api/hash/blake2s',
-      {
-        data: {
-          text: '🔥💻🧠✨',
-        },
-      }
-    )
+    const response = await request.post('/api/hash/blake2s', {
+      data: {
+        text: '🔥💻🧠✨',
+      },
+    })
 
     expect(await response.ok()).toBeTruthy()
 
@@ -51,14 +42,11 @@ test.describe('Blake2s Hash API Page', () => {
   })
 
   test('test for large input', async ({ request }) => {
-    const response = await request.post(
-      'http://localhost:3000/api/hash/blake2s',
-      {
-        data: {
-          text: 'hello world!'.repeat(1_000_000),
-        },
-      }
-    )
+    const response = await request.post('/api/hash/blake2s', {
+      data: {
+        text: 'hello world!'.repeat(1_000_000),
+      },
+    })
 
     expect(await response.ok()).toBeTruthy()
     expect(await response.status()).toBe(200)
